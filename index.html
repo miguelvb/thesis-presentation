@@ -13,10 +13,14 @@
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: grey;
   stroke-width: 1px;
-  shape-rendering: crispEdges;
+  /* shape-rendering: crispEdges;*/
 }
+
+.tick line{
+    opacity: 0.2;
+  }
 
 /*.x.axis path {
   display: none;
@@ -48,7 +52,8 @@ var levels = 10,
   y_padding_rects = 3, 
   new_circle_col = "#FF3333",
   new_c_opacity = 1,
-  c_opacity = 0.6, 
+  c_opacity = 0.8, 
+  part_opacity = 0.3, 
   time_interval = 1000/4, 
   tot_width= 960, 
   bars_width = 800, 
@@ -112,7 +117,7 @@ svg.selectAll(".rects")
       .attr("stroke", "#fff")
       .attr("fill", rect_color)
       //.attr("opacity", function(d) { return d.level/levels;})
-      .attr("opacity", c_opacity)
+      .attr("opacity", part_opacity)
       .attr("id", function(d){ return "rect-" + d.level;})
       ;
 
@@ -157,19 +162,23 @@ var ylog = d3.scale.log()
 var xAxis = d3.svg.axis()
     .scale(x_scale)
     .orient("bottom")
+    .innerTickSize(-bar_height)
 
 var xlogAxis = d3.svg.axis()
     .scale(xlog)
     .orient("bottom")
+    .innerTickSize(-bar_height)
     .tickFormat(function(d) {return d3.format(".1s")(d) });
 
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
+    .innerTickSize(-bar_width)
 
 var ylogAxis = d3.svg.axis()
     .scale(ylog)
     .orient("left")
+    .innerTickSize(-bar_width)
     .ticks(10, ",.3f");
     //.tickValues([0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.]);
 
@@ -360,23 +369,27 @@ function add_particle(){
     .attr("fill", rect_color)
     .transition()
     .duration(transition_time)
-    .attr("opacity", c_opacity);
+    .attr("opacity",  part_opacity );
 
 
   // if avalanche: 
   if(size > 0){
 
-    d3.select("#bar-" + size)
-      .transition()
-      .duration(transition_in)
+    console.log("size", size);
+
+    var bb = d3.select("#bar-" + size)
+      //.transition()
+      //.duration(0)
       .attr("fill", rect_avalanche)
-      .transition()
-      .duration(transition_time)
-      .attr("fill", rect_color)
+      //.transition()
+      //.duration(transition_time)
+      //.attr("fill", rect_color)
+
+    console.log("bb", bb);
 
     d3.select("#point-" + size)
       .transition()
-      .duration(transition_in)
+      .duration(0)
       .attr("fill", rect_avalanche)
       .transition()
       .duration(transition_time)
@@ -428,21 +441,24 @@ function update_quakes(size){
 
   //console.log("quake", size, bar_data); 
   // update the bars: 
-  update(); 
+  update(size); 
 
 };
 
-function update(){
+function update(size){
   d3.selectAll(".bar")
     .data(bar_data)
+    .attr("fill", function(d){ if(size == d.x) return rect_avalanche; else return rect_color;})
     .transition()
     .duration(transition_time * 3/2)
     .attr("height", function(d) { return bar_height - y(d.frequency); })
     .attr("y", function(d) { return y(d.frequency); })
     .attr("opacity", c_opacity)
+    .attr("fill", rect_color)
 
     d3.selectAll(".point")
     .data(bar_data)
+    .attr("fill", function(d){ if(size == d.x) return rect_avalanche; else return rect_color;})
     .transition()
     .duration(transition_time * 3/2)
     .attr("cy", function(d) { 
@@ -450,6 +466,7 @@ function update(){
       return ylog(d.frequency); 
     })
     .attr("opacity", c_opacity)
+    .attr("fill", rect_color)
 };
  
 
