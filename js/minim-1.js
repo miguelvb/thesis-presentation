@@ -22,6 +22,9 @@ var levels = 10,
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = tot_width - margin.left - margin.right,
     height = (rect_height + y_padding_rects) * (levels +2) - margin.top - margin.bottom;
+    height = 600; 
+
+//var svg = d3.select("#minim").append("svg").append("rect").attr("fill", "#fff").attr("width", width).attr("height", height).attr("stroke","#D1E0E0"); 
 
 var svg = d3.select("#minim").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -29,7 +32,12 @@ var svg = d3.select("#minim").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  svg.append("rect").attr("fill", "none").attr("width", width).attr("height", height).attr("stroke","#D1E0E0"); 
+  svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "white");
+
+  //svg.append("rect").attr("fill", "none").attr("width", width).attr("height", height).attr("stroke","#D1E0E0"); 
 
 
 data = []; 

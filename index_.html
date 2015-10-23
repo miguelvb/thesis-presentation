@@ -1,475 +1,411 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-.bar:hover, .rects:hover{
-  fill: brown;
-}
-
-.axis {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: grey;
-  stroke-width: 1px;
-  /* shape-rendering: crispEdges;*/
-}
-
-.tick line{
-    opacity: 0.2;
-  }
-
-
-</style>
-<body>
-<script src="js/d3.min.js"></script>
-
-<div id="buttons">
-<button onclick="fu_timer(1000)">Start time</button>
-<button onclick="clearInterval(intv);">Stop time</button>
-<button onclick="fu_timer(500)"> Fast </button>
-<button onclick="fu_timer(200);"> Faster </button>
-<button onclick="fu_timer(20);"> Insane </button>
-<button onclick="reset_data();"> Reset </button>
-</div>
-<div id="minim"> </div>
-<script>
-
-
-var levels = 10, 
-  rect_width = rect_height = 50,
-  rect_color = "#246BB2", //"#CCEBFF",
-  circle_r = 9,
-  circle_color = "#008F47",
-  rect_avalanche = "#CC4040",
-  x_pos = 30, 
-  y_padding_rects = 3, 
-  new_circle_col = "#FF3333",
-  new_c_opacity = 1,
-  c_opacity = 0.8, 
-  part_opacity = 0.3, 
-  time_interval = 1000/4, 
-  tot_width= 960, 
-  bars_width = 800, 
-  bars_height = 200, 
-  transition_time  = time_interval /2, 
-  transition_in = d3.min([50,transition_time]), 
-  domain_log_min = 0.003 
-  ; 
-
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = tot_width - margin.left - margin.right,
-    height = (rect_height + y_padding_rects) * (levels +2) - margin.top - margin.bottom;
-
-var svg = d3.select("#minim").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  svg.append("rect").attr("fill", "none").attr("width", width).attr("height", height).attr("stroke","#D1E0E0"); 
-
-
-data = []; 
-bar_data = []
-
-var d_levels = d3.range(0,levels); //console.log("levs", levels); 
-
-d_levels.forEach(function(d){
-  dd = {}; 
-  dd.x = x_pos; 
-  dd.width = rect_width; 
-  dd.height = rect_height; 
-  dd.color = rect_color; 
-  dd.av_color = rect_avalanche; 
-  dd.status = "empty";
-  dd.level = d;
-  dd.y = margin.bottom + (dd.level) * (dd.height + y_padding_rects);
-  data.push(dd); 
-  // bar data: 
-  bar_data.push({
-    x: dd.level + 1, 
-    ny: 0,
-    frequency: 1, // Math.random(),
-    label: String(dd.level + 1)
-  })
-})
-
-//console.log("data", data); console.log("bar_data", bar_data); 
-
-var get_y = function(d) { return height - rect_height - d.y;}; 
-
-// the model :: 
-svg.selectAll(".rects")
-      .data(data)
-    .enter().append("rect")
-      .attr("class", "rects")
-      .attr("x", function(d) { return d.x; })
-      .attr("width", function(d) { return d.width; })
-      .attr("height",  function(d) { return d.height; })
-      .attr("y",  function(d) { return get_y(d); })
-      .attr("stroke", "#fff")
-      .attr("fill", rect_color)
-      //.attr("opacity", function(d) { return d.level/levels;})
-      .attr("opacity", part_opacity)
-      .attr("id", function(d){ return "rect-" + d.level;})
-      ;
-
-svg.selectAll(".circles")
-      .data(data)
-    .enter().append("circle")
-      .attr("r", circle_r)
-      .attr("class", "particle")
-      .attr("stroke", "black")
-      .attr("stroke-width", 1)
-      .attr("opacity", 0.0)
-      .attr("fill", circle_color)
-      .attr("cx",function(d){ return d.x + d.width/2;})
-      .attr("cy",function(d){ return get_y(d) + rect_height/2 ;})
-      .attr("id", function(d){ return "circle-" + d.level;})
-
-      ;
-
-// THE BARS /////////////////
-var bar_margin = {top: 50, right: 20, bottom: 30, left: 200},
-    bar_width = bars_width - bar_margin.left - bar_margin.right,
-    bar_height = bars_height;
-
-var x = d3.scale.ordinal()
-    .rangeRoundBands([0, bar_width], .1);
-
-    //console.log("rband", x.rangeBand());
-
-var xlog = d3.scale.log()
-    .domain([1,levels])
-    .range([30, bar_width]);
-
-var x_scale = x; 
-
-var y = d3.scale.linear()
-    .range([bar_height, 0]);
-
-var ylog = d3.scale.log()
-    .domain([domain_log_min,1])
-    .range([bar_height, 0]);
-
-var xAxis = d3.svg.axis()
-    .scale(x_scale)
-    .orient("bottom")
-    .innerTickSize(-bar_height)
-
-var xlogAxis = d3.svg.axis()
-    .scale(xlog)
-    .orient("bottom")
-    .innerTickSize(-bar_height)
-    .tickFormat(function(d) {return d3.format(".1s")(d) });
-
-var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left")
-    .innerTickSize(-bar_width)
-
-var ylogAxis = d3.svg.axis()
-    .scale(ylog)
-    .orient("left")
-    .innerTickSize(-bar_width)
-    .ticks(10, ",.3f");
-    //.tickValues([0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.]);
-
-  x.domain(bar_data.map(function(d) { return d.x; }));
-  //xp.domain(bar_data.map(function(d) { return d.x; }));
-  y.domain([0, d3.max(bar_data, function(d) { return d.frequency; })]);
-    y.domain([0, 0.6]);
-
-
-  barsg = svg.append("g")
-  .attr("transform", "translate(" + bar_margin.left +"," + bar_margin.top + ")")
-
-
-  barsg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0, " + bar_height + ")")
-      .call(xAxis)
-    .append("text")
-      .attr("y", 30)
-      .attr("x", bar_width/2)
-      .attr("dy", ".71em")
-      .style({"text-anchor": "middle", "font-size": "14px"})
-      .text("Size");
-
-  barsg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", -55)
-      .attr("x", -bar_height/2)
-      .attr("dy", ".71em")
-      .style({"text-anchor": "middle", "font-size": "14px"})
-      .text("Frequency");
-
-  //console.log("rangeB: ", x.rangeBand())
-
-  barsg.selectAll(".bar")
-      .data(bar_data)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("id", function(d){ return "bar-" + d.x })
-      //.attr("x", function(d) { return x_scale(d.x) - x.rangeBand()/2.; })
-      .attr("x", function(d) { return x_scale(d.x); })
-      .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(0); })
-      .attr("height", function(d) { return bar_height - y(0); })
-      .attr("fill", rect_color)
-      .attr("opacity", 0)
-      ;
-
-    bar_data.forEach(function(d){ d.frequency = 0.1; d.ny = 0;})
-    //console.log("bar_data", bar_data);
-
-// THE POINTS /////////////////
-var  point_margin = {top: 300, right: 20, bottom: 30, left: 200},
-     point_width =  bars_width -  point_margin.left -  point_margin.right,
-     point_height =  bars_height;
-
-    var xp = d3.scale.linear()
-    .domain([1, levels])
-    .range([x.rangeBand(), bar_width - x.rangeBand()]);
-
-    var xpAxis = d3.svg.axis()
-    .scale(xp)
-    .orient("bottom");
-
-
-   pointsg = svg.append("g")
-    .attr("transform", "translate(" +  point_margin.left +"," +  point_margin.top + ")")
-
-   pointsg.append("g")
-      .attr("class", "x axis xpoint")
-      .attr("transform", "translate(" + 0 + ", " +  point_height + ")")
-      .call(xlogAxis)
-    .append("text")
-      .attr("y", 30)
-      .attr("x",  point_width/2)
-      .attr("dy", ".71em")
-      .style({"text-anchor": "middle", "font-size": "14px"})
-      .text("Size");
-
-   pointsg.append("g")
-      .attr("class", "y axis ypoint")
-      .call(ylogAxis)
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", -55)
-      .attr("x", - point_height/2)
-      .attr("dy", ".71em")
-      .style({"text-anchor": "middle", "font-size": "14px"})
-      .text("Frequency");
-
-  //console.log("rangeB: ", x.rangeBand());
-  //console.log("bd", bar_data);
-  //bar_data.push( {x: 2.5, frequency: 0.8, ny: 2} ) ; 
-  
-   pointsg.selectAll(".point")
-      .data(bar_data)
-    .enter().append("circle")
-      .attr("class", "point")
-      .attr("id", function(d){ return "point-" + d.x })
-      //.attr("uid", function(d){ console.log("pp: ", d)} )
-      //.attr("cx", function(d) { return x(d.x) + x.rangeBand()/2; })
-      .attr("cx", function(d) { return xlog(d.x); })
-      .attr("r", 6)
-      .attr("cy", function(d) { return ylog(domain_log_min / 100); })
-      .attr("fill", rect_color)
-      .attr("opacity", 1)
-      ;
-
-     bar_data.forEach(function(d){ d.frequency = 0; d.ny = 0;})
-
-
-var intv; 
-f_timer = function(time){ intv = setInterval(add_particle, time_interval); }; 
-fu_timer = function(time){ 
-  clearInterval(intv); 
-  time_interval = time; 
-  transition_time = time_interval /2; 
-  intv = setInterval(add_particle, time);
-  };
-
-function reset_data(){
-
-  bar_data.forEach(function(d){
-    d.frequency = 0, 
-    d.ny = 0
-  })
-
-  data.forEach(function(d){
-    d.status = "empty"
-  })
-  update(); 
-
-  svg.selectAll(".rects")
-  .attr("fill", rect_color); 
-
-  svg.selectAll(".particle")
-  .attr("opacity", 0); 
-
-
-}
-
-function add_particle(){ 
-
-  // the empty levels: we will hit one of those via random number: 
-  empty_levels = []; 
-  data.forEach(function(d){
-    if(d.status == "empty") empty_levels.push(d.level); 
-  })
-  n_empty = empty_levels.length
-  //console.log("empties:", n_empty, empty_levels);
-
-  //var lev = Math.floor(Math.random() * levels);
-  // uncomment this for faster quakes, but then the "time" scale is not accurate...
-  var rlev = Math.floor(Math.random() * n_empty);
-  var lev = empty_levels[rlev]; 
-
-  // update data: 
-  nfull = 0; 
-  size = 0; 
-
-  data.forEach(function(d){
-    if(d.level == lev) d.status = "full";
-    if(d.status == "full" && size == d.level) size += 1;  
-    if(d.status == "full") nfull+=1; 
-
-  })
-
-  //console.log("level:", lev); 
-  //console.log("quake size:", size); 
-
-
-  //update circles and rectangles:  
-  d3.select("#circle-" + lev)
-    .transition()
-    .duration(transition_in)
-    .attr("opacity", new_c_opacity)
-    .transition()
-    .duration(transition_time)
-    .attr("opacity", c_opacity);
-
-  d3.select("#rect-" + lev)
-    .transition()
-    .duration(transition_in)
-    .attr("opacity", new_c_opacity)
-    .attr("fill", rect_color)
-    .transition()
-    .duration(transition_time)
-    .attr("opacity",  part_opacity );
-
-
-  // if avalanche: 
-  if(size > 0){
-
-    console.log("size", size);
-
-    var bb = d3.select("#bar-" + size)
-      //.transition()
-      //.duration(0)
-      .attr("fill", rect_avalanche)
-      //.transition()
-      //.duration(transition_time)
-      //.attr("fill", rect_color)
-
-    console.log("bb", bb);
-
-    d3.select("#point-" + size)
-      .transition()
-      .duration(0)
-      .attr("fill", rect_avalanche)
-      .transition()
-      .duration(transition_time)
-      .attr("fill", rect_color)
-
-
-    data.forEach(function(d){
-
-      if(d.level < size) {
-
-        d3.selectAll("#circle-" + d.level)
-          .transition()
-          .duration(transition_in)
-          .attr("opacity", new_c_opacity)
-          .transition()
-          .duration(transition_time * 3/2)
-          .attr("opacity", 0);
-
-        d3.selectAll("#rect-" + d.level)
-          .transition()
-          .duration(transition_in)
-          .attr("fill", rect_avalanche)
-          .transition()
-          .duration(transition_time * 3/2)
-          .attr("fill", rect_color);
-
-        d.status = "empty";
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Reveal.js</h1>
+					<h3>The HTML Presentation Framework</h3>
+					<p>
+						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Hello There</h2>
+					<p>
+						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
+					</p>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>Vertical Slides</h2>
+						<p>Slides can be nested inside of each other.</p>
+						<p>Use the <em>Space</em> key to navigate through all slides.</p>
+						<br>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section>
+						<h2>Basement Level 1</h2>
+						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+					</section>
+					<section>
+						<h2>Basement Level 2</h2>
+						<p>That's it, time to go back up.</p>
+						<br>
+						<a href="#/2">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
+						</a>
+					</section>
+				</section>
+
+				<section>
+					<h2>Slides</h2>
+					<p>
+						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Point of View</h2>
+					<p>
+						Press <strong>ESC</strong> to enter the slide overview.
+					</p>
+					<p>
+						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
+					</p>
+				</section>
+
+				<section>
+					<h2>Touch Optimized</h2>
+					<p>
+						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
+					</p>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Markdown support
+
+						Write content using inline or external Markdown.
+						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+
+						```
+						<section data-markdown>
+						  ## Markdown support
+
+						  Write content using inline or external Markdown.
+						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
+						</section>
+						```
+					</script>
+				</section>
+
+				<section>
+					<section id="fragments">
+						<h2>Fragments</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+					</section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's different types of fragments, like:</p>
+						<p class="fragment grow">grow</p>
+						<p class="fragment shrink">shrink</p>
+						<p class="fragment fade-out">fade-out</p>
+						<p class="fragment current-visible">current-visible</p>
+						<p class="fragment highlight-red">highlight-red</p>
+						<p class="fragment highlight-blue">highlight-blue</p>
+					</section>
+				</section>
+
+				<section id="transitions">
+					<h2>Transition Styles</h2>
+					<p>
+						You can select from different transitions, like: <br>
+						<a href="?transition=none#/transitions">None</a> -
+						<a href="?transition=fade#/transitions">Fade</a> -
+						<a href="?transition=slide#/transitions">Slide</a> -
+						<a href="?transition=convex#/transitions">Convex</a> -
+						<a href="?transition=concave#/transitions">Concave</a> -
+						<a href="?transition=zoom#/transitions">Zoom</a>
+					</p>
+				</section>
+
+				<section id="themes">
+					<h2>Themes</h2>
+					<p>
+						reveal.js comes with a few themes built in: <br>
+						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/blood.css'); return false;">Blood</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
+						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
+					</p>
+				</section>
+
+				<section>
+					<section data-background="#dddddd">
+						<h2>Slide Backgrounds</h2>
+						<p>
+							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
+						</p>
+						<a href="#" class="navigate-down">
+							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
+						<h2>Image Backgrounds</h2>
+						<pre><code class="hljs">&lt;section data-background="image.png"&gt;</code></pre>
+					</section>
+					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
+						<h2>Tiled Backgrounds</h2>
+						<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
+					</section>
+					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
+						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+							<h2>Video Backgrounds</h2>
+							<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
+						</div>
+					</section>
+					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<h2>... and GIFs!</h2>
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
+					</p>
+					<pre><code class="hljs">Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
+				</section>
+
+				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<h2>Background Transitions</h2>
+					<p>
+						You can override background transitions per-slide.
+					</p>
+					<pre><code class="hljs" style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
+				</section>
+
+				<section>
+					<h2>Pretty Code</h2>
+					<pre><code class="hljs" data-trim contenteditable>
+function linkify( selector ) {
+  if( supports3DTransforms ) {
+
+    var nodes = document.querySelectorAll( selector );
+
+    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+      var node = nodes[i];
+
+      if( !node.className ) {
+        node.className += ' roll';
       }
-
-    })
-
-    update_quakes(size);
+    }
   }
-  
-};
+}
+					</code></pre>
+					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
+				</section>
 
-function update_quakes(size){
+				<section>
+					<h2>Marvelous List</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+				</section>
 
-  var idx = size - 1; 
-  dd = bar_data[idx]; 
-  dd.ny += 1; 
-  var NN = 0; 
-  bar_data.forEach(function(d){
-    NN += d.ny;
-  })   
-  bar_data.forEach(function(d){
-    d.frequency = d.ny / NN;
-  })  
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+				</section>
 
-  //console.log("quake", size, bar_data); 
-  // update the bars: 
-  update(size); 
-  if( size == levels) update_full_quake(); 
+				<section>
+					<h2>Tabular Tables</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Value</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Apples</td>
+								<td>$1</td>
+								<td>7</td>
+							</tr>
+							<tr>
+								<td>Lemonade</td>
+								<td>$2</td>
+								<td>18</td>
+							</tr>
+							<tr>
+								<td>Bread</td>
+								<td>$3</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
 
-};
+				<section>
+					<h2>Clever Quotes</h2>
+					<p>
+						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
+					</p>
+					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
+						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
+						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
+					</blockquote>
+				</section>
 
-function update_full_quake(){}; 
+				<section>
+					<h2>Intergalactic Interconnections</h2>
+					<p>
+						You can link between slides internally,
+						<a href="#/2/3">like this</a>.
+					</p>
+				</section>
 
-function update(size){
-  d3.selectAll(".bar")
-    .data(bar_data)
-    .attr("fill", function(d){ if(size == d.x) return rect_avalanche; else return rect_color;})
-    .transition()
-    .duration(transition_time * 3/2)
-    .attr("height", function(d) { return bar_height - y(d.frequency); })
-    .attr("y", function(d) { return y(d.frequency); })
-    .attr("opacity", c_opacity)
-    .attr("fill", rect_color)
+				<section>
+					<h2>Speaker View</h2>
+					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
+					<p>Press the <em>S</em> key to try it out.</p>
 
-    d3.selectAll(".point")
-    .data(bar_data)
-    .attr("fill", function(d){ if(size == d.x) return rect_avalanche; else return rect_color;})
-    .transition()
-    .duration(transition_time * 3/2)
-    .attr("cy", function(d) { 
-      if(d.frequency < domain_log_min) return ylog(domain_log_min / 100); 
-      return ylog(d.frequency); 
-    })
-    .attr("opacity", c_opacity)
-    .attr("fill", rect_color)
-};
- 
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
 
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
+					<iframe src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
 
+				<section>
+					<h2>Global State</h2>
+					<p>
+						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
+						will be added as a class to the document element when the slide is open. This lets you
+						apply broader style changes, like switching the page background.
+					</p>
+				</section>
 
-</script>
+				<section data-state="customevent">
+					<h2>State Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+Reveal.addEventListener( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+					<p>
+						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
+					</p>
+				</section>
+
+				<section>
+					<h2>Much more</h2>
+					<ul>
+						<li>Right-to-left support</li>
+						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
+						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
+					</ul>
+				</section>
+
+				<section style="text-align: left;">
+					<h1>THE END</h1>
+					<p>
+						- <a href="http://slides.com">Try the online editor</a> <br>
+						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
