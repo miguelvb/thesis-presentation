@@ -1,0 +1,10 @@
+---
+theme :
+  name : bootstrap-3
+---
+{% include JB/setup %}
+{% if page.use_math %}
+      {% include math_support.html %}
+    {% endif %}
+{% include themes/bootstrap-3/default.html %}
+
