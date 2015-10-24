@@ -1,0 +1,36 @@
+.bar:hover, .rects:hover{
+  fill: brown;
+}
+.axis {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #07FF53;
+  stroke-width: 1.5px;
+  /* shape-rendering: crispEdges;*/
+}
+.tick line{
+    opacity: 0.2;
+  }
+.tick text {
+	fill: #E84646;
+}
+.axis text {
+	fill: #E13F40;
+
+}
+
+.lines.level-1 {
+  stroke: #A24555; 
+}
+.lines.level-2 {
+  stroke: #5D5DFB; 
+}
+.lines.level-3 {
+  stroke: #A76A78; 
+}
+.lines {
+  stroke-width: 6px;
+}

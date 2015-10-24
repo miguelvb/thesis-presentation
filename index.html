@@ -30,7 +30,9 @@
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 
+		<script src="js/jquery.min.js"></script>
 		<script src="js/d3.min.js"></script>
+		<link rel="stylesheet" href="css/tesis.css" id="theme">
 
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -51,55 +53,45 @@
 				         data-charset="utf-8">
 				</section>
 
-				<section data-background="#234254">
-					<style type="text/css">
-						.bar:hover, .rects:hover{
-						  fill: brown;
-						}
-						.axis {
-						  font: 10px sans-serif;
-						}
-						.axis path,
-						.axis line {
-						  fill: none;
-						  stroke: grey;
-						  stroke-width: 1px;
-						  /* shape-rendering: crispEdges;*/
-						}
-						.tick line{
-						    opacity: 0.2;
-						  }
-					</style>
+				<!-- MINIMALIST SIZES --> 
 
-					<!--<h2> Minimalist Model</h2>-->
+				<section >
 					<div id="buttons">
 						<button onclick="fu_timer(1000)">Start time</button>
 						<button onclick="clearInterval(intv);">Stop time</button>
 						<button onclick="fu_timer(500)"> Fast </button>
-						<button onclick="fu_timer(200);"> Faster </button>
+						<button onclick="fu_timer(100);"> Faster </button>
 						<button onclick="fu_timer(20);"> Insane </button>
 						<button onclick="reset_data();"> Reset </button>
+						<button onclick="toggleSounds();"> Sounds </button>
+						<button onclick="eff_time();"> Eff-Time </button>
 					</div>
+
 					<div id="minim"></div> 
 					<script src="js/minim-1.js"> </script>
+				</section>
 
-				</section> 
+				<!-- MINIMALIST TIMES --> 
+
+				<section >
+					<div id="buttons">
+						<button onclick="fu_timer(1000)">Start time</button>
+						<button onclick="clearInterval(intv);">Stop time</button>
+						<button onclick="fu_timer(500)"> Fast </button>
+						<button onclick="fu_timer(100);"> Faster </button>
+						<button onclick="fu_timer(20);"> Insane </button>
+						<button onclick="fu_timer_full_speed();"> !!!! </button>
+						<button onclick="reset_data();"> Reset </button>
+						<button onclick="toggleSounds();"> Sounds </button>
+						<button onclick="eff_time();"> Eff-Time </button>
+						<button onclick="draw_anim();"> Draw Animation </button>
+					</div>
+
+					<div id="minim-time"></div> 
+					<script src="js/minim-time.js"> </script>
+				</section>
 
 				<section>
-					<style>
-						.lines.level-1 {
-						  stroke: #A24555; 
-						}
-						.lines.level-2 {
-						  stroke: #5D5DFB; 
-						}
-						.lines.level-3 {
-						  stroke: #A76A78; 
-						}
-						.lines {
-						  stroke-width: 6px;
-						}
-					</style> 
 					<div id="htree"></div> 
 					<script src="js/htree.js"> </script>
 				</section>     

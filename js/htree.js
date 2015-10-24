@@ -21,26 +21,26 @@ var dlines = [
   {x1: -3, y1: 15, x2: -2, y2: 17 , level: 3, pos: 4}
 ]; 
 
-var width = 900, height = 800; 
+var width_h = 900, height_h = 800; 
 
-var x = d3.scale.linear().domain([-15,15]).range([0, width])
-var y = d3.scale.linear().domain([-5,25]).range([0,height])
+var xh = d3.scale.linear().domain([-15,15]).range([0, width_h])
+var yh = d3.scale.linear().domain([-5,25]).range([0,height_h])
 
-var svg = d3.select("#htree").append("svg")
-    .attr("width", width)
-    .attr("height", height)
+var svg_h = d3.select("#htree").append("svg")
+    .attr("width", width_h)
+    .attr("height", height_h)
   .append("g")
 
-  var line = svg.selectAll(".lines")
+  var line_h = svg_h.selectAll(".lines")
     .data(dlines)
     .enter()
     .append("line")
 
-  line
+  line_h
     .attr("class", function(d) {return "lines " + "level-" + d.level })
-    .attr("x1", function(d) {return x(d.x1); })  
-    .attr("y1", function(d) {return y(d.y1); })  
-    .attr("x2", function(d) {return x(d.x2); })    
-    .attr("y2", function(d) {return y(d.y2); })
+    .attr("x1", function(d) {return xh(d.x1); })  
+    .attr("y1", function(d) {return yh(d.y1); })  
+    .attr("x2", function(d) {return xh(d.x2); })    
+    .attr("y2", function(d) {return yh(d.y2); })
     .attr("id", function(d) { return "line-level-" + d.level + "-pos-" +  d.pos;})
     ;    

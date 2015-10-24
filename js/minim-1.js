@@ -1,6 +1,6 @@
 var levels = 10, 
   rect_width = rect_height = 50,
-  rect_color = "#246BB2", //"#CCEBFF",
+  rect_color = "#BFE5FF", //#246BB2", //"#CCEBFF",
   circle_r = 9,
   circle_color = "#008F47",
   rect_avalanche = "#CC4040",
@@ -9,20 +9,32 @@ var levels = 10,
   new_circle_col = "#FF3333",
   new_c_opacity = 1,
   c_opacity = 0.8, 
-  part_opacity = 0.3, 
+  part_opacity = 0.8, 
   time_interval = 1000/4, 
   tot_width= 960, 
   bars_width = 800, 
   bars_height = 200, 
   transition_time  = time_interval /2, 
   transition_in = d3.min([50,transition_time]), 
-  domain_log_min = 0.003 
+  domain_log_min = 0.003, 
+  efficient_time = false,
+  draw_animation = true
   ; 
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = tot_width - margin.left - margin.right,
     height = (rect_height + y_padding_rects) * (levels +2) - margin.top - margin.bottom;
     height = 600; 
+
+// audios: 
+// audios, in the sounds object sound["3"] == bell-3-1.wav; 
+var sounds = []; var nm_;
+
+for (i = 1; i < 11; i++) { 
+    nm_ = "./audio/bell-"+ i + ".mp3"; 
+    sounds.push(new Audio(nm_));
+}
+var play_sounds = false; 
 
 //var svg = d3.select("#minim").append("svg").append("rect").attr("fill", "#fff").attr("width", width).attr("height", height).attr("stroke","#D1E0E0"); 
 
@@ -32,16 +44,17 @@ var svg = d3.select("#minim").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  svg.append("rect")
+  /*svg.append("rect")
     .attr("width", "100%")
     .attr("height", "100%")
     .attr("fill", "white");
-
+  */
   //svg.append("rect").attr("fill", "none").attr("width", width).attr("height", height).attr("stroke","#D1E0E0"); 
 
 
 data = []; 
-bar_data = []
+bar_data = [];
+time_data = []; 
 
 var d_levels = d3.range(0,levels); //console.log("levs", levels); 
 
@@ -55,8 +68,10 @@ d_levels.forEach(function(d){
   dd.status = "empty";
   dd.level = d;
   dd.y = margin.bottom + (dd.level) * (dd.height + y_padding_rects);
+  // data are the status, x, y, etc. of the "cells".
   data.push(dd); 
   // bar data: 
+  // data to make the bars in the graphs, and the circles... 
   bar_data.push({
     x: dd.level + 1, 
     ny: 0,
@@ -64,8 +79,6 @@ d_levels.forEach(function(d){
     label: String(dd.level + 1)
   })
 })
-
-//console.log("data", data); console.log("bar_data", bar_data); 
 
 var get_y = function(d) { return height - rect_height - d.y;}; 
 
@@ -148,8 +161,8 @@ var ylogAxis = d3.svg.axis()
 
   x.domain(bar_data.map(function(d) { return d.x; }));
   //xp.domain(bar_data.map(function(d) { return d.x; }));
-  y.domain([0, d3.max(bar_data, function(d) { return d.frequency; })]);
-    y.domain([0, 0.6]);
+  //y.domain([0, d3.max(bar_data, function(d) { return d.frequency; })]);
+  y.domain([0, 0.6]);
 
 
   barsg = svg.append("g")
@@ -266,6 +279,14 @@ fu_timer = function(time){
   intv = setInterval(add_particle, time);
   };
 
+fu_timer_full_speed = function(time){ 
+  clearInterval(intv); 
+  time_interval = 6; 
+  draw_animation = false; 
+  transition_time = time_interval /2; 
+  intv = setInterval(add_particle, time);
+  };
+
 function reset_data(){
 
   bar_data.forEach(function(d){
@@ -276,7 +297,7 @@ function reset_data(){
   data.forEach(function(d){
     d.status = "empty"
   })
-  update(); 
+  update(-1); 
 
   svg.selectAll(".rects")
   .attr("fill", rect_color); 
@@ -289,6 +310,9 @@ function reset_data(){
 
 function add_particle(){ 
 
+  // add to total time: 
+  total_time += 1; 
+
   // the empty levels: we will hit one of those via random number: 
   empty_levels = []; 
   data.forEach(function(d){
@@ -297,10 +321,13 @@ function add_particle(){
   n_empty = empty_levels.length
   //console.log("empties:", n_empty, empty_levels);
 
-  //var lev = Math.floor(Math.random() * levels);
-  // uncomment this for faster quakes, but then the "time" scale is not accurate...
-  var rlev = Math.floor(Math.random() * n_empty);
-  var lev = empty_levels[rlev]; 
+  if(efficient_time){
+    var rlev = Math.floor(Math.random() * n_empty);
+    var lev = empty_levels[rlev]; 
+  } else {
+    var lev = Math.floor(Math.random() * levels);
+  };
+  
 
   // update data: 
   nfull = 0; 
@@ -317,68 +344,86 @@ function add_particle(){
   //console.log("quake size:", size); 
 
 
+  if(draw_animation){
+
   //update circles and rectangles:  
-  d3.select("#circle-" + lev)
-    .transition()
-    .duration(transition_in)
-    .attr("opacity", new_c_opacity)
-    .transition()
-    .duration(transition_time)
-    .attr("opacity", c_opacity);
+    d3.select("#circle-" + lev)
+      .transition()
+      .duration(transition_in)
+      .attr("opacity", new_c_opacity)
+      .transition()
+      .duration(transition_time)
+      .attr("opacity", c_opacity);
 
-  d3.select("#rect-" + lev)
-    .transition()
-    .duration(transition_in)
-    .attr("opacity", new_c_opacity)
-    .attr("fill", rect_color)
-    .transition()
-    .duration(transition_time)
-    .attr("opacity",  part_opacity );
+    d3.select("#rect-" + lev)
+      .transition()
+      .duration(transition_in)
+      .attr("opacity", new_c_opacity)
+      .attr("fill", "#246BB2")
+      .transition()
+      .duration(transition_time)
+      .attr("opacity",  part_opacity )
+      .attr("fill", rect_color);
 
-
+  }
   // if avalanche: 
   if(size > 0){
 
-    console.log("size", size);
+    //console.log("size", size);
 
-    var bb = d3.select("#bar-" + size)
-      //.transition()
-      //.duration(0)
-      .attr("fill", rect_avalanche)
-      //.transition()
-      //.duration(transition_time)
-      //.attr("fill", rect_color)
+    if(draw_animation){
 
-    console.log("bb", bb);
+      var bb = d3.select("#bar-" + size)
+        //.transition()
+        //.duration(0)
+        .attr("fill", rect_avalanche)
+        //.transition()
+        //.duration(transition_time)
+        //.attr("fill", rect_color)
 
-    d3.select("#point-" + size)
-      .transition()
-      .duration(0)
-      .attr("fill", rect_avalanche)
-      .transition()
-      .duration(transition_time)
-      .attr("fill", rect_color)
+      //console.log("bb", bb);
+
+      d3.select("#point-" + size)
+        .transition()
+        .duration(0)
+        .attr("fill", rect_avalanche)
+        .transition()
+        .duration(transition_time)
+        .attr("fill", rect_color)
+
+      // flash the rect in the time minim: 
+      d3.select("#t2-rect")
+        .transition()
+        .duration(0)
+        .attr("fill", rect_avalanche)
+        .transition()
+        .duration(transition_time)
+        .attr("fill", rect_color)
+    }
 
 
     data.forEach(function(d){
 
       if(d.level < size) {
 
-        d3.selectAll("#circle-" + d.level)
-          .transition()
-          .duration(transition_in)
-          .attr("opacity", new_c_opacity)
-          .transition()
-          .duration(transition_time * 3/2)
-          .attr("opacity", 0);
+        if(draw_animation){
 
-        d3.selectAll("#rect-" + d.level)
-          .transition()
-          .duration(transition_in)
-          .attr("fill", rect_avalanche)
-          .transition()
-          .duration(transition_time * 3/2)
-          .attr("fill", rect_color);
+          d3.selectAll("#circle-" + d.level)
+            .transition()
+            .duration(transition_in)
+            .attr("opacity", new_c_opacity)
+            .transition()
+            .duration(transition_time * 3/2)
+            .attr("opacity", 0);
+
+          d3.selectAll("#rect-" + d.level)
+            .transition()
+            .duration(transition_in)
+            .attr("fill", rect_avalanche)
+            .transition()
+            .duration(transition_time * 3/2)
+            .attr("fill", rect_color);
+        }
 
         d.status = "empty";
       }
@@ -413,25 +458,59 @@ function update_quakes(size){
 function update_full_quake(){}; 
 
 function update(size){
-  d3.selectAll(".bar")
-    .data(bar_data)
-    .attr("fill", function(d){ if(size == d.x) return rect_avalanche; else return rect_color;})
-    .transition()
-    .duration(transition_time * 3/2)
-    .attr("height", function(d) { return bar_height - y(d.frequency); })
-    .attr("y", function(d) { return y(d.frequency); })
-    .attr("opacity", c_opacity)
-    .attr("fill", rect_color)
+
+  if(draw_animation){
+
+    d3.selectAll(".bar")
+      .data(bar_data)
+      .attr("fill", function(d){ if(size == d.x) return rect_avalanche; else return rect_color;})
+      .transition()
+      .duration(transition_time * 3/2)
+      .attr("height", function(d) { return bar_height - y(d.frequency); })
+      .attr("y", function(d) { return y(d.frequency); })
+      .attr("opacity", c_opacity)
+      .attr("fill", rect_color)
+      //.attr("tt", function(d){ console.log(d.x, d.frequency, y(d.frequency), bar_height);})
 
     d3.selectAll(".point")
-    .data(bar_data)
-    .attr("fill", function(d){ if(size == d.x) return rect_avalanche; else return rect_color;})
-    .transition()
-    .duration(transition_time * 3/2)
-    .attr("cy", function(d) { 
-      if(d.frequency < domain_log_min) return ylog(domain_log_min / 100); 
-      return ylog(d.frequency); 
-    })
-    .attr("opacity", c_opacity)
-    .attr("fill", rect_color)
+      .data(bar_data)
+      .attr("fill", function(d){ if(size == d.x) return rect_avalanche; else return rect_color;})
+      .transition()
+      .duration(transition_time * 3/2)
+      .attr("cy", function(d) { 
+        if(d.frequency < domain_log_min) return ylog(domain_log_min / 100); 
+        return ylog(d.frequency); 
+      })
+      .attr("opacity", c_opacity)
+      .attr("fill", rect_color)
+
+  }
+
+  minim_play(size); 
 };
+
+function minim_play(size){
+  //console.log("Playing sound", size, play_sounds); 
+  if(play_sounds){
+    for (i = 0; i < sounds.length; i++) { 
+      sounds[i].pause();
+      sounds[i].currentTime = 0; 
+      if( i == size - 1) sounds[i].play(); 
+    }
+  }
+};
+
+function toggleSounds(){
+  play_sounds = !play_sounds; 
+
+}
+
+function eff_time(){
+  efficient_time = !efficient_time; 
+
+}
+
+function draw_anim(){
+  draw_animation = !draw_animation; 
+
+}
