@@ -4,7 +4,7 @@
 
 ---
 
-## Esta Presentación
+## Estructura
 
 
 -v-
@@ -37,6 +37,6 @@
 ## ..(.)..
 
 ---
-## INTRODUCCION 
+## Introducción
 
 <!-- .slide: data-background="#234254" -->

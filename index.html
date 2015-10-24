@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Tesis Miguel Vázquez-Prada Baillet</title>
+		<title>Tesis Miguel VP B</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -51,19 +51,6 @@
 				         data-charset="utf-8">
 				</section>
 
-				<section>
-					<div id="test"></div>
-					<script type="text/javascript">
-					var svg = d3.select("#test").append("svg")
-					    .attr("width",500)
-					    .attr("height", 500);
-					 svg.append("rect")
-					    .attr("width", "100%")
-					    .attr("height", "100%")
-					    .attr("fill", "white");
-					</script>
-				</section>	
-
 				<section data-background="#234254">
 					<style type="text/css">
 						.bar:hover, .rects:hover{
@@ -96,7 +83,26 @@
 					<div id="minim"></div> 
 					<script src="js/minim-1.js"> </script>
 
-				</section>         
+				</section> 
+
+				<section>
+					<style>
+						.lines.level-1 {
+						  stroke: #A24555; 
+						}
+						.lines.level-2 {
+						  stroke: #5D5DFB; 
+						}
+						.lines.level-3 {
+						  stroke: #A76A78; 
+						}
+						.lines {
+						  stroke-width: 6px;
+						}
+					</style> 
+					<div id="htree"></div> 
+					<script src="js/htree.js"> </script>
+				</section>     
 
 			</div>
 
