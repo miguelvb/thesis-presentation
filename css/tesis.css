@@ -1,8 +1,23 @@
+h2.title4 {
+font-size: 70%; 
+color: #CC4040;
+}
+
+/*  **************** */
+
+.occ-line {
+  fill: steelblue;
+  stroke: steelblue;
+  opacity: 0.8; 
+  stroke-width: 2.5px;
+}
+
+/* ****************  */
 .bar:hover, .rects:hover{
   fill: brown;
 }
 .axis {
-  font: 10px sans-serif;
+  font: 12px sans-serif;
 }
 .axis path,
 .axis line {
@@ -14,6 +29,7 @@
 .tick line{
     opacity: 0.2;
   }
+
 .tick text {
 	fill: #E84646;
 }
@@ -33,4 +49,68 @@
 }
 .lines {
   stroke-width: 6px;
+}
+
+/* ********* */
+
+button  {
+  color: black; 
+  font-size: 12px; ; 
+  margin: 0; 
+  background: #6699FF;
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+  cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
 }

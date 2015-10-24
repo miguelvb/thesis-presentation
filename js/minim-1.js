@@ -36,8 +36,6 @@ for (i = 1; i < 11; i++) {
 }
 var play_sounds = false; 
 
-//var svg = d3.select("#minim").append("svg").append("rect").attr("fill", "#fff").attr("width", width).attr("height", height).attr("stroke","#D1E0E0"); 
-
 var svg = d3.select("#minim").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -51,6 +49,7 @@ var svg = d3.select("#minim").append("svg")
   */
   //svg.append("rect").attr("fill", "none").attr("width", width).attr("height", height).attr("stroke","#D1E0E0"); 
 
+// DATA //////////////////////////////////////////////////////////////////////////////////////////
 
 data = []; 
 bar_data = [];
@@ -81,6 +80,8 @@ d_levels.forEach(function(d){
 })
 
 var get_y = function(d) { return height - rect_height - d.y;}; 
+
+// SVGS //////////////////////////////////////////////////////////////////////////////////////////
 
 // the model :: 
 svg.selectAll(".rects")
@@ -113,7 +114,8 @@ svg.selectAll(".circles")
 
       ;
 
-// THE BARS /////////////////
+// AXIS  ////////////////////////////////////////////////////////////////////////////////////////////
+
 var bar_margin = {top: 50, right: 20, bottom: 30, left: 200},
     bar_width = bars_width - bar_margin.left - bar_margin.right,
     bar_height = bars_height;
@@ -140,30 +142,34 @@ var xAxis = d3.svg.axis()
     .scale(x_scale)
     .orient("bottom")
     .innerTickSize(-bar_height)
+    .tickPadding(10); 
 
 var xlogAxis = d3.svg.axis()
     .scale(xlog)
     .orient("bottom")
     .innerTickSize(-bar_height)
-    .tickFormat(function(d) {return d3.format(".1s")(d) });
+    .tickFormat(function(d) {return d3.format(".1s")(d) })
+    .tickPadding(10);
 
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
     .innerTickSize(-bar_width)
+    .tickPadding(10); 
 
 var ylogAxis = d3.svg.axis()
     .scale(ylog)
     .orient("left")
     .innerTickSize(-bar_width)
-    .ticks(10, ",.3f");
+    .ticks(10, ",.3f")
+    .tickPadding(10); 
     //.tickValues([0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.]);
 
   x.domain(bar_data.map(function(d) { return d.x; }));
-  //xp.domain(bar_data.map(function(d) { return d.x; }));
-  //y.domain([0, d3.max(bar_data, function(d) { return d.frequency; })]);
   y.domain([0, 0.6]);
 
+
+// BARS //////////////////////////////////////////////////////////////////////////////////////////
 
   barsg = svg.append("g")
   .attr("transform", "translate(" + bar_margin.left +"," + bar_margin.top + ")")
@@ -174,9 +180,8 @@ var ylogAxis = d3.svg.axis()
       .attr("transform", "translate(0, " + bar_height + ")")
       .call(xAxis)
     .append("text")
-      .attr("y", 30)
       .attr("x", bar_width/2)
-      .attr("dy", ".71em")
+      .attr("y", "30")
       .style({"text-anchor": "middle", "font-size": "14px"})
       .text("Size");
 
@@ -185,7 +190,7 @@ var ylogAxis = d3.svg.axis()
       .call(yAxis)
     .append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", -55)
+      .attr("y", -60)
       .attr("x", -bar_height/2)
       .attr("dy", ".71em")
       .style({"text-anchor": "middle", "font-size": "14px"})
@@ -210,7 +215,8 @@ var ylogAxis = d3.svg.axis()
     bar_data.forEach(function(d){ d.frequency = 0.1; d.ny = 0;})
     //console.log("bar_data", bar_data);
 
-// THE POINTS /////////////////
+// THE POINTS ////////////////////////////////////////////////////////////////////////////////////////////
+
 var  point_margin = {top: 300, right: 20, bottom: 30, left: 200},
      point_width =  bars_width -  point_margin.left -  point_margin.right,
      point_height =  bars_height;
@@ -243,7 +249,7 @@ var  point_margin = {top: 300, right: 20, bottom: 30, left: 200},
       .call(ylogAxis)
     .append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", -55)
+      .attr("y", -60)
       .attr("x", - point_height/2)
       .attr("dy", ".71em")
       .style({"text-anchor": "middle", "font-size": "14px"})
@@ -269,6 +275,7 @@ var  point_margin = {top: 300, right: 20, bottom: 30, left: 200},
 
      bar_data.forEach(function(d){ d.frequency = 0; d.ny = 0;})
 
+// INTERVAL FUNCTIONS ////////////////////////////////////////////////////////////
 
 var intv; 
 f_timer = function(time){ intv = setInterval(add_particle, time_interval); }; 
@@ -308,6 +315,8 @@ function reset_data(){
 
 }
 
+// ADD PARTICLE //////////////////////////////////
+
 function add_particle(){ 
 
   // add to total time: 
@@ -315,6 +324,7 @@ function add_particle(){
 
   // the empty levels: we will hit one of those via random number: 
   empty_levels = []; 
+
   data.forEach(function(d){
     if(d.status == "empty") empty_levels.push(d.level); 
   })
@@ -332,13 +342,18 @@ function add_particle(){
   // update data: 
   nfull = 0; 
   size = 0; 
+  var nfull_before = 0; 
 
   data.forEach(function(d){
+    if(d.status == "full") nfull_before+=1; 
     if(d.level == lev) d.status = "full";
     if(d.status == "full" && size == d.level) size += 1;  
     if(d.status == "full") nfull+=1; 
 
   })
+
+  // update the full levels 
+  update_minim_full_levels(nfull_before); 
 
   //console.log("level:", lev); 
   //console.log("quake size:", size); 
@@ -433,6 +448,16 @@ function add_particle(){
     update_quakes(size);
   }
   
+};
+
+function update_minin_full_levels(nfull){
+
+  if(draw_animation){
+
+
+
+  }
+
 };
 
 function update_quakes(size){
