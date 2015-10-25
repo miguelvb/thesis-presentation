@@ -40,6 +40,15 @@
 
 	<body>
 
+		<style>
+		.MathJax span {
+			font-size: 30px;
+		}
+		.small-math .MathJax span {
+			font-size: 25px;
+		}
+		</style>
+
 		<div class="reveal">
 
 			<!-- Any section element inside of this container is displayed as a slide -->
@@ -133,11 +142,40 @@
 						<script src="js/minim-time.js"> </script>
 					</section>
 
-					<section data-markdown="minim_math.md"  
-				         data-separator="^---"  
-				         data-separator-vertical="^-v-"  
-				         data-separator-notes="^Note:"  
-				         data-charset="utf-8">
+					<section>
+						<h3>Soluciones Algebráicas</h3>
+						<h4>Probabilidad de retorno del terremoto característico </h4>
+
+						$$ P(n) = \frac{n-1}{2^n} , \    N = 2 $$
+					
+						$$ P(n) = \left( \frac{2}{3} \right)^n  \frac{ ( n - 2 ) ( n + 5 )}{32}  , \     N = 3 $$
+
+						$$ P(n) = \left( \frac{1}{4} \right)^n  \left[ - \frac{13}{16} + \frac{7 n}{4} - \frac{n^2}{2} + \frac{n^3}{32}  + 3^n \left[ -\frac{3}{16} + \frac{7 n}{324}  + \frac{n^2}{108}  + \frac{n^3}{2599} \right] \right] , \     N = 4 $$
+
+					</section>
+
+					<section>
+						<h3>Soluciones Algebráicas</h3>
+						<h4>Matriz de Transición, $ N = 4 $</h4>
+						<img src="img/minim-conf4.png" width="400px" height="150px"> </img>
+						<div style="font-size: 70%;">
+						\[ M =  \begin{pmatrix}
+						1/4 &amp; 1/4 &amp; 1/4 &amp; 1/4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+						0 &amp; 2/4 &amp; 0 &amp; 0 &amp; 1/4 &amp; 1/4 &amp; 0 &amp; 0 \\
+						0 &amp; 0 &amp; 2/4 &amp; 0  &amp; 1/4 &amp; 0 &amp; 1/4 &amp; 0 \\
+						1/4  &amp; 0 &amp; 0 &amp; 1/4 &amp; 0 &amp; 1/4 &amp; 1/4 &amp; 0 \\
+						0 &amp; 0 &amp; 0 &amp; 0 &amp; 3/4 &amp; 0 &amp; 0 &amp; 1/4 \\
+						0 &amp; 1/4 &amp; 0 &amp; 0 &amp; 0 &amp; 2/4 &amp; 0 &amp; 1/4 \\
+						1/4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2/4 &amp; 1/4 \\
+						1/4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 3/4 
+						\end{pmatrix} \]
+						</div>
+
+					</section>
+
+					<section>
+						<h3> </h3>
+
 					</section>
 
 				</section> <!-- FIN MINIMALISTA --> 
@@ -173,22 +211,12 @@
 					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
 					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
-
-			// the math: 
-			Reveal.initialize({
-				math: {
-					// mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
-					config: 'TeX-AMS_HTML-full'
-				},
-
-				dependencies: [
+					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'lib/js/classList.js' },
 					{ src: 'plugin/math/math.js', async: true }
 				]
 			});
+
 
 		</script>
 
