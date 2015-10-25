@@ -33,6 +33,10 @@
 		<script src="js/d3.min.js"></script>
 		<link rel="stylesheet" href="css/tesis.css" id="theme">
 
+		<script type="text/x-mathjax-config">
+  			MathJax.Hub.Config({ TeX: { extensions: ["color.js"] }});
+		</script>
+
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -62,13 +66,15 @@
 				</section>
 
 				<!-- MINIMALIST SIZES --> 
-				<section> 
-					<section >
-						<h2> El Modelo Minimalista </h2>
-					</section>
+				<section >
+						<h2> El Modelo Minimalista (MM) </h2>
+						<img src="img/minim.png" height="350px"> </img>
+				</section>
 
+				<section> 	
+				    <!-- MM AUTOMATA CELULAR ******************************************************* -->			
 					<section >
-						<h2 class="title4"> Modelo Minimalista </h2>
+						<h2 class="title4"> MM: Autómata Celular </h2>
 						<div id="buttons">
 							<button onclick="fu_timer(1000)">Start time</button>
 							<button onclick="clearInterval(intv);">Stop time</button>
@@ -143,21 +149,21 @@
 					</section>
 
 					<section>
-						<h3>Soluciones Algebráicas</h3>
-						<h4>Probabilidad de retorno del terremoto característico </h4>
+						<img src="img/pk-black.png" width="450px"> </img>
+						<img src="img/pn10-black.png" width="450px"> </img>
+					</section>
+				</section>
 
-						$$ P(n) = \frac{n-1}{2^n} , \    N = 2 $$
-					
-						$$ P(n) = \left( \frac{2}{3} \right)^n  \frac{ ( n - 2 ) ( n + 5 )}{32}  , \     N = 3 $$
+				<section>  <!-- MM y algebra ******************************************************* -->
 
-						$$ P(n) = \left( \frac{1}{4} \right)^n  \left[ - \frac{13}{16} + \frac{7 n}{4} - \frac{n^2}{2} + \frac{n^3}{32}  + 3^n \left[ -\frac{3}{16} + \frac{7 n}{324}  + \frac{n^2}{108}  + \frac{n^3}{2599} \right] \right] , \     N = 4 $$
-
+					<section> 
+						<h2> MM: Soluciones Algebráicas </h2>
 					</section>
 
-					<section>
-						<h3>Soluciones Algebráicas</h3>
-						<h4>Matriz de Transición, $ N = 4 $</h4>
+					<section data-background="#234254">
+						<h3>Configuraciones, Cadenas de Markov </h3>
 						<img src="img/minim-conf4.png" width="400px" height="150px"> </img>
+						<h4>Matriz de Transición, $ N = 4 $</h4>
 						<div style="font-size: 70%;">
 						\[ M =  \begin{pmatrix}
 						1/4 &amp; 1/4 &amp; 1/4 &amp; 1/4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
@@ -170,20 +176,112 @@
 						1/4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 3/4 
 						\end{pmatrix} \]
 						</div>
-
 					</section>
 
 					<section>
-						<h3> </h3>
+						<h4>Probabilidad de retorno del terremoto característico </h4>
+						<div> 
+						<img src="img/pn20-black.png" style="float:left;margin:0px 15px 15px 0px;height:200px;"> </img>
+						$$ P(n) = \frac{n-1}{2^n} , \    N = 2 $$
+					
+						$$ P(n) = \left( \frac{2}{3} \right)^n  \frac{ ( n - 2 ) ( n + 5 )}{32}  , \     N = 3 $$
 
+						$$ P(n) = \left( \frac{1}{4} \right)^n  \left[ - \frac{13}{16} + \frac{7 n}{4} - \frac{n^2}{2} + \frac{n^3}{32}  + 3^n \left[ -\frac{3}{16} + \frac{7 n}{324}  + \frac{n^2}{108}  + \frac{n^3}{2599} \right] \right] , \     N = 4 $$
+						</div>
 					</section>
 
-				</section> <!-- FIN MINIMALISTA --> 
+				</section> <!-- FIN MM ALGEBRA --> 
+
+				<section> <!-- MM y las fallas ******************************************************* -->
 
 				<section>
-					<div id="htree"></div> 
-					<script src="js/htree.js"> </script>
-				</section>     
+						<h2> MM y las Fallas Reales</h2>
+						<img src="img/los-angeles.jpg" width="600px"> </img>
+				</section>
+
+				<section>
+						<h3> <a> Ajuste </a>  de MM a una falla</h3>
+						<ol>
+							<li class="fragment"> $ \alpha \ (MM) \ \approx \alpha \ (falla)  \implies \;$ <em> <a> N </a> </em>   </li>
+							<li class="fragment"> $ \definecolor{tau}{RGB}{66,175,250} \mu  \ (falla) \dashrightarrow \mu  \ (MM) \implies \color{tau} \tau \ (MM)  $  </li>
+						</ol>
+				</section>
+
+				<section>
+						<h3> <a>Área </a> de Tokio </h3>
+						<img src="img/tokio-black.png" width="800px" height="600px"> </img>
+				</section>
+
+				<section>
+					<h3> <a> Predicción </a> de terremotos con MM </h3>
+					<img src="img/parkfield-black.png" width="700px" class="fragment"> </img>
+
+				</section>
+				
+				<section>
+					<h3> Estrategia de <a> optimización  </a> de la predicción </h3>
+				</section>
+
+				<section> 
+					<img src="img/alarma-ini-bl.png" height="150px" class="fragment" style="margin-bottom: 0px; margin-top: 0px;"> </img>
+					<img src="img/alarma-on-bl.png" height="150px" class="fragment" style="margin-bottom: 0px; margin-top: 0px;"> </img>
+					<img src="img/alarma-fallo-bl.png" height="150px" class="fragment" style="margin-bottom: 0px; margin-top: 0px;"> </img>
+					<img src="img/alarma-exito-bl.png" height="150px" class="fragment" style="margin-bottom: 0px; margin-top: 0px;"> </img>
+				</section>
+
+
+				<section>
+					<h3> Ejemplo <a> N = 20  </a> </h3>
+					$ f_e $ = fracción de errores </br> 
+					$ f_a $ = fracción de tiempo de alarma  </br> 
+					$ L (n) \ = \ f_e + f_a $ 
+ 				</section>
+
+				<section>
+						<h3> $f_e (n) , \; f_a (n),\; L(n) \ \ \ (N = 20) $</h3>
+						<img src="img/fefa-black.png" width="700px" height="500px"> </img>
+				</section>
+				<section>
+						<h3> $f_a \; vs \; f_e $ </h3>
+						<img src="img/favsfe-black.png" width="700px" height="500px"> </img>
+					</section>
+
+				</section> <!-- FIN MM y las fallas --> 
+
+				<section>
+					<section>
+						<img src="img/lattice/lattice.png" width="800px"> </img>
+					</section>
+					<section>
+						<img src="img/lattice/lattice-1.png" width="800px"> </img>
+					</section>
+					<section>
+						<img src="img/lattice/lattice-2.png" width="800px"> </img>
+					</section>
+					<section>
+						<img src="img/lattice/lattice-3.png" width="800px"> </img>
+					</section>
+					<section>
+						<img src="img/lattice/lattice-4.png" width="800px"> </img>
+					</section>
+					<section>
+						<img src="img/lattice/lattice-5.png" width="800px"> </img>
+					</section>
+					<section>
+						<img src="img/lattice/lattice-5b.png" width="800px"> </img>
+					</section>
+					<section>
+						<img src="img/lattice/lattice-6.png" width="800px"> </img>
+					</section>
+					<section>
+						<img src="img/lattice/lattice.png" width="800px"> </img>
+					</section>
+
+					<section>
+						<div id="htree"></div> 
+						<script src="js/htree.js"> </script>
+					</section>   
+				</section>  
 
 			</div>
 

@@ -55,13 +55,13 @@
     margin: 15px 15px;
     background: none;
     border: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    box-shadow: none;
     */
 }
 
 h2.title4 {
 font-size: 70%; 
-color: #CC4040;
+color: #FFFFFF ; /*#CC4040;*/
 }
 
 /*  **************** */
@@ -83,7 +83,7 @@ color: #CC4040;
 .axis path,
 .axis line {
   fill: none;
-  stroke: #07FF53;
+  stroke: #86C2FF; /*#07FF53;*/
   stroke-width: 1.5px;
   /* shape-rendering: crispEdges;*/
 }
@@ -95,7 +95,7 @@ color: #CC4040;
 	fill: #E84646;
 }
 .axis text {
-	fill: #E13F40;
+	fill: #82C5FF; /*#E13F40;*/
 
 }
 
