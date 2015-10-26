@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="lattice-4.svg"
-   inkscape:export-filename="/Users/tangiblex/tesis/pages/img/lattice/mixed/lattice-exp.png"
+   inkscape:export-filename="/Users/tangiblex/tesis/pages/img/lattice/l3/lattice-mixed-fig.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -30,9 +30,9 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.50373353"
      inkscape:cx="814.27187"
-     inkscape:cy="497.10839"
+     inkscape:cy="500.52243"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1280"
      inkscape:window-height="752"
@@ -61,7 +61,7 @@
      inkscape:label="back"
      sodipodi:insensitive="true"
      transform="translate(-150.3586,-184.54379)"
-     style="display:inline">
+     style="display:none">
     <rect
        style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3943"
@@ -74,7 +74,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="lattice"
-     style="opacity:0.099;display:inline"
+     style="opacity:0.1015625;display:inline"
      sodipodi:insensitive="true"
      transform="translate(-150.3586,-184.54379)">
     <g
@@ -130,11 +130,10 @@
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="figure"
-     style="display:none"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <image
-       y="371.00452"
-       x="300.84543"
+       y="325.34546"
+       x="255.18637"
        id="image3292"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAoUAAAJeCAYAAADC0H84AAAABHNCSVQICAgIfAhkiAAAIABJREFU
 eJzs3XeYpFWZ9/Fvx5kh5yQSJQpKFiQpSBRBRUSCCq7ZVfd9FXeNq7tiWrOLWcQACiqiiAQBBRFB
@@ -577,8 +576,8 @@ NkeS1sxMoSS1XwO4HbiEdBU7blBS17MkjSR1xjrABmT5uptKboskrZFBoSRJkhxTKEmSJINCSZIk
 YVAoSZIkDAolSZKEQaEkSZIwKJQkSRIGhZIkScKgUJIkSRgUSpIkCYNCSZIkYVAoSZIk4P8BGTnu
 b8CaR3oAAAAASUVORK5CYII=
 "
-       height="675.4812"
-       width="861.38422" />
+       height="772.75488"
+       width="956.67267" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -702,9 +701,7 @@ b8CaR3oAAAAASUVORK5CYII=
          y="351.36737"
          x="467.99835"
          id="tspan3114"
-         sodipodi:role="line"><tspan
-           id="tspan3116"
-           style="font-size:44.19237137px;font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Sans;-inkscape-font-specification:Sans Italic">Mixed case     </tspan></tspan></text>
+         sodipodi:role="line">Caso Mixto</tspan></text>
     <rect
        style="fill:none;stroke:#cecfff;stroke-width:6.68808937;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect3124"
@@ -894,7 +891,8 @@ b8CaR3oAAAAASUVORK5CYII=
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="eq1"
-     style="display:none">
+     style="display:none"
+     sodipodi:insensitive="true">
     <image
        y="496.53424"
        x="421.61111"
