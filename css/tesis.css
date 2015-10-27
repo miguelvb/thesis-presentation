@@ -202,3 +202,13 @@ ol.conclusion {
 .reveal small a{
     vertical-align: text-bottom;
 }
+
+.reveal small {
+    vertical-align: text-bottom;
+}
+
+p.peque  {
+	font-size: 24px;
+	text-align: left;
+}
+

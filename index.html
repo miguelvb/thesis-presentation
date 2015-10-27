@@ -108,13 +108,21 @@
 						<h2> Modelo de <a> agregación </a> de <a> pares </a> de partículas  </h2>
 					</section>
 
-					<section>
+					<section data-background="img/lattice/perc.png" data-background-size="800px">
 						<h2> <a> Motivación </a> </h2>
-						<p class="fragment"> La percolación <a>clásica</a> </p> 
-						<p class="fragment"> Modelo probabilísticos con transiciones de fase <a>geométricas</a> (exponentes críticos) </p>
-						<small class="fragment"> Marco <a>conceptual unificado</a> $\rightarrow$ diseminación de infecciones, <a>dinámica de las regiones solares</a>, fractura en medios heterogéneos, <a>estructura galactica</a>, redes (internet), etc. </small>
+						</br></br></br></br></br></br></br></br></br>
+					</section>
+					<section data-background="img/lattice/perc2.png" data-background-size="800px">
+						<h2> <a> Motivación </a> </h2>
+						<p> La percolación <a>clásica</a> </p> 
+						<p class="fragment"> Modelos probabilísticos con transiciones de fase <a>geométricas</a> (exponentes críticos) </p>
+						<small class="fragment"> Marco <a>conceptual unificado</a> $ \definecolor{tau}{RGB}{66,175,250} \rightarrow$ diseminación de infecciones, <a>dinámica de las regiones solares</a>, fractura en medios heterogéneos, <a>estructura galactica</a>, redes (internet), etc. </small>
 						<p class="fragment"> La percolación <a>de dímeros</a>? </p> 
 						<p class="fragment"> Misma clase de <a> universalidad</a>? </p> 
+					</section>
+
+					<section>
+						<h4> Modelo de <a> agregación </a> de <a> pares </a> de partículas en red de Bethe, coordinación Z = 3: <a> ejemplo </a> </h4>
 					</section>
 
 					<section>
@@ -130,9 +138,6 @@
 						<img src="img/lattice/lattice-3.png" width="800px"> </img>
 					</section>
 					<section>
-						<img src="img/lattice/lattice-4.png" width="800px"> </img>
-					</section>
-					<section>
 						<img src="img/lattice/lattice-5.png" width="800px"> </img>
 					</section>
 					<section>
@@ -142,6 +147,16 @@
 						<img src="img/lattice/lattice-6.png" width="800px"> </img>
 					</section>
 				</section>  
+
+				<section>
+						<h4> Resultados modelo en <a> una dimensión </a> </h4>
+						<!---<small class="fragment"> Tamaño Medio: $\ \ \color{tau} T(l) \propto e^{0.366\ l} $ </small></br> -->
+						<small class="fragment"> Probabilidad de Tamaño Finito: $\ \color{tau} S = 1 $ </small></br>
+						<small class="fragment"> Probabilidad tamaño $s$ : $\ \color{tau} lim_{s \rightarrow \infty} n_s(l) = 0 $</small></br>
+						<h4 class="fragment"> Resultados modelo en <a> 2 dimensiones </a> </h4>
+						<small class="fragment">  $ l \leq 3 \rightarrow $ solo <a>tamaños finitos </a> </small></br>
+						<small class="fragment">  $ l \geq 4 \rightarrow $ aparecen tamaños <a>infinitos</a> </small></br>
+				</section>
 
 				<section> <!--  L = 2   --> 
 					<section>
@@ -229,88 +244,115 @@
 
 				<section>
 
+					<section>
+						<h3> <a> Introducción </a> </h3>
+						<p class="fragment"> Modelos de <a>haces de fibras </a> (MHF) </p> 
+						<img src="img/fractura/fiber.png" height="300px" class = "fragment"> </img>
+					</section>
+
+					<section>
+						<h3>  Modelos de <a> transferencia de carga </a> </h3>
+						<small class="fragment"> elementos en un <a>retículo</a>. <span class="fragment"> Elemento roto <a>transfiere su carga</a> a los demás. </span> </small> 
+						<p class="fragment"> Tipos de transferencia de <a>carga</a> </p>
+						<img src="img/fractura/transferencia.png" width="800px" class = "fragment"> </img>
+						<p class="fragment"> Modelos estáticos: <a>carga</a> a la que el sistema colapsa ($\color{tau} \sigma_c$)</p> 
+						<p class="fragment"> Modelos dinámicos: <a>tiempo</a>  en el que el sistema colapsa ($\color{tau} T_c$)</p>
+					</section>
+
+					<section>
+						<h3>  Modelos de <a> transferencia de carga Jerárquica en el tiempo</a> </h3>
+						<p class="fragment"> La transferencia de <a>carga</a> se da entre "áreas" iguales</p>
+						<p class="fragment"> Simulando la <a>redistribución elástica </a> de esfuerzo adyacente a una ruptura </p>
+						<p class="fragment"> Conveniente para simular fracturas en medios heterogéneos (fallas, etc.) </p>
+					</section>
+
+
 					<section> 
 						<h3>  Es el tiempo de colapso de un sistema infinito de TCJ, <a> T = 0 </a> ? </h3>
 						<img src="img/fractura/tabla-hls-2.png" height="300px" class = "fragment"> </img>
 					</section> 
 
-					<section>
+					<!-- <section>
 						<h2> Árbol de  <a> Cayley </a> </h2>
 						<img src="img/fractura/cayley.svg.png" height="600px"> </img>
 					</section>
+					-->
+					<section>
+						<h3> Método <a>Probabilístico</a> </h3>
+						<p>  <small> tiempo de rotura individual ($\color{tau} \delta_m$):</small>  $\ \color{tau} \  \delta_m = 1 \ / \ \Gamma_{m}$  </p>
+						<p>   <small>Anchura de "desintegración":</small> $\color{tau} \ \ \Gamma_{m} = \sigma_m^{\rho} \ \ ( e^{\sigma_m} ) $  <p>
+						<!--  -->
+						<p>   <small>Tiempo de <a> Colapso </a>: </small> $ \color{tau}  \ \ \color{tau} T = \sum_{m} \delta_m$  <p>
+						<p>   <small>Valores en los ejemplos:</small> $ \color{tau} \ \rho = 2, c = 2$  <p>
+					</section> 
+					<section>
+						<h3> Método <a>Probabilístico</a> <em>vs</em> Método <a>Estándar</a> </h3>
+						<img src="img/fractura/prob.png" height="600px" class="fragment"> </img>
+					</section> 
+
 
 					<section>
 						<h2> Procesos de <a> Rotura </a> </h2>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/cayley.svg.png" height="600px"> </img>
 					</section>	
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-todos.png" height="600px"> </img>
 					</section>	
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2b.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2c.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2d.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2e.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2f.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2g.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2gb.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2h.png" height="600px"> </img>
 					</section>
 					<section>
-						<h4> ... </h4>
+						
 						<img src="img/fractura/elem-r1-des-2end.png" height="600px"> </img>
 					</section>
 				</section>   
 
-				<section>
-
-					<section>
-						<h3> TCJ:  Método <a>Probabilístico</a> </h3>
-						<p>  <small> Probabilidad de "desintegración":</small>  $\ \  p_m = \Gamma_{m} \ * \ \delta $  </p>
-						<p>   <small>Anchura de desintegración:</small> $\ \ \Gamma_{m} = \sigma_m^{\rho} \ \ ( e^{\sigma_m} ) $  <p>
-						<p>   <small>Valores:</small> $ \ \ \rho = 2, \ \Gamma_m =  \sigma_m^{2}, \ N, c = 2$  <p>
-						<p>   <small>Tiempos de Desintegración: </small> $ \ \ \delta_m =\frac{p_m}{\Gamma_m}$  <p>
-						<p>   <small>Tiempo de <a> Colapso</a>: </small> $$ \definecolor{tau}{RGB}{66,175,250} \ \ T = \sum_{m = 1, N} \delta_m = \ \sum_{m = 1, N} \frac{p_m}{\Gamma_m} = \color{tau} \sum_{m = 1, N} \frac{p_m}{\sigma_m^2} $$  <p>
-
-					</section>  
+				<section> 
 					<!--
 					<section>
 						<h3> Ejemplo : <a> N = 2 </a> </h3>
@@ -330,12 +372,20 @@
 					<section>
 						<h3> Configuraciones <a> <em> (r, s) </em> </a> </h3>
 						<img src="img/fractura/exn2/n2b.png" height="200px" class = "fragment"> </img>
+						<!--
 						<p><span class="fragment"> $ \delta_r = \sum_s p(r,s) \; / \; \Gamma (r,s)$ </span> 
 							<span class="fragment"> $, \ \  \Gamma (r,s) = \sum_i  \Gamma_i $ </span>
 						</p>
 						<p class="fragment"> $ \Gamma(0) = 1^2 + 1^2 = 2 \rightarrow \delta (0) = 1 \; / \; \Gamma(0) = \frac{1}{2} $ </p>
 						<p class="fragment"> $ \Gamma(1) = 2^2 = 4 \rightarrow \delta (1) = 1 \; / \; \Gamma(1) = \frac{1}{4} $ </p> 
 						<p class="fragment"> $ \definecolor{white}{RGB}{255,255,255} \color{tau} T \color{white} = \delta (0) + \delta (1) =  \color{tau} \frac{3}{4} $ </p> 
+					-->
+						<p class="fragment"> $ \Gamma (r,s) = \sum_i \color{tau} \sigma_i^{\rho}$ </p> 
+						<p class="fragment"> Probabilidad $\color{tau} p(r,s)$ </p> 
+						<p class="fragment"> Ejemplo:  $\color{tau}{T} = \delta_0 + \delta_1 = \frac{1}{1^2 + 1^2} + \frac{1}{2^2} = \color{tau}{3\ / \ 4}$ </p> 
+
+						</p>
+
 					</section>
 
 				</section>  
@@ -355,18 +405,18 @@
 						
 					</section> 
 					<section>
-						<img src="img/fractura/trans/eff-2.png" height="600px"> </img>
-						<small> Diagrama <a>Primario</a>, N = 8, y su genealogía. </small>
-					</section> 
+						<img src="img/fractura/trans/eff-3b.png" height="600px"> </img>
+						<small> Diagrama <a>Primario</a> y su genealogía y Diagrama <a>Efectivo</a> para N = 8. </small>
+					</section>
 					<section>
-						<h3> Cotas <a> Mínimas</a>  para el tiempo de <a> colapso </a> </h3>
-					</br></br>
-						<p class="fragment"> Cada nivel "temporal" del diagrama es "reducido" a una $\color{tau} \delta_{eff}^i < \delta_i $ </p>
+						<h4> Cotas <a> Mínimas</a>  para el tiempo de <a> colapso </a> </h4>
+						<img src="img/fractura/trans/eff-3b.png" height="600px" float="left" align="left" class ="fragment">  </img>
+						</br></br>
+						<p class="fragment peque"> Para cada nivel temporal, $\ r$, $\ \color{tau} \Gamma_r$ es sustituido por una anchura de desintegración efectiva </br>  $\color{tau} a_r > \Gamma_r $ </p>
+						<p class="fragment peque"> Asegurando así , $\  \color{tau} \delta_r^{eff} < \delta_r $ </p>
+						<p class="fragment peque"> y  $\ \ \color{tau} T_{eff} < T $ </p>
+						<p class="fragment peque"> Utilizando  $\color{tau} \ a_r = \prod_s \Gamma (r,s)^{p(r,s)}$ encontramos una <a>cota mínima</a> para el valor de <a>T</a>.... </p>
 					</section>   
-					<section>
-						<img src="img/fractura/trans/eff-3.png" height="600px" float="left" align="left"> </img>
-						<p class="fragment">  $\color{tau} \ a_r = \prod_s \Gamma (r,s)^{p(r,s)}$ </p>
-					</section> 
 					<section>
 						<h4> <a> Resultado </a> </h4>
 						<img src="img/fractura/trans/fig-bounds.png" height="600px" class = "fragment"> </img>
@@ -378,13 +428,26 @@
 
 					</section>  
 				
-				</section>	 
-				<section >
-						<h2> El Modelo Minimalista (MM) </h2>
-						<img src="img/minim.png" height="350px"> </img>
 				</section>
 
 				<section> 	
+
+					<section >
+						<h2> El Modelo Minimalista (MM) </h2>
+						<img src="img/minim.png" height="350px"> </img>
+					</section>
+
+					<section >
+						<h4> Motivación </h4>
+						<p class="fragment"> Diseño de un automata celular sencillo que modele los tiempos de recurrencia de los <a>grandes terremotos en fallas</a></p> 
+					</section>
+					<section >
+						<h4> Autómatas celulares </h4>
+						<p class="fragment"> Elementos ("células", "celdas", etc.) en un <a>retículo discreto</a> </p> 
+						<p class="fragment"> Interacción entre elementos por <a>"vecindad"</a> </p> 
+						<p class="fragment"> <a>Reglas de transición<a/>: estado en $\ t \rightarrow \ $ estado en  $\ t + 1$  </p>
+					</section>
+
 				    <!-- MM AUTOMATA CELULAR ******************************************************* -->			
 					<section >
 						<h2 class="title4"> MM: Autómata Celular </h2>
