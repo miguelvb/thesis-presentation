@@ -1,3 +1,5 @@
+
+
 /* ------- from simple.css ------------ */
 
 @import url(https://fonts.googleapis.com/css?family=News+Cycle:400,700);
@@ -174,4 +176,29 @@ button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
+}
+
+/*  **************** */
+
+.pos-img {
+	position:absolute; 
+	margin-left: auto; 
+	margin-right: auto; 
+	text-align: center;
+	left:0; right: 0;  top:50px;
+}
+.pos-img-2 {
+	position:absolute; 
+	margin-left: auto; 
+	margin-right: auto; 
+	text-align: center;
+	left:0; right: 0;
+}
+
+ol.conclusion {
+	font-size: 27px;
+}
+
+.reveal small a{
+    vertical-align: text-bottom;
 }
