@@ -352,43 +352,24 @@
 					</section>
 				</section>   
 
-				<section> 
+				<section>
+					<h3> Configuraciones <a> <em> (r, s) </em> </a> </h3>
+					<img src="img/fractura/exn2/n2b.png" height="200px" class = "fragment"> </img>
 					<!--
-					<section>
-						<h3> Ejemplo : <a> N = 2 </a> </h3>
-						<img src="img/fractura/exn2/n2.png" height="200px" class = "fragment"> </img>
-						<p><span class="fragment"> $ \delta_0 = p_{a \rightarrow b} \; / \; \Gamma_a =$ </span> 
-							<span class="fragment"> $  \frac{1}{2} \; / \; 1^2 $ </span> <span class="fragment"> $ = \frac{1}{2}$</span>
-						</p>
-						<p><span class="fragment"> $ \delta_1 = p_{b \rightarrow x} \; / \; \Gamma_b =$ </span> 
-							<span class="fragment"> $  1 \; / \; 2^2 $ </span> <span class="fragment"> $ = \frac{1}{4}$</span>
-						</p>
-						<p><span class="fragment"> $ T = \delta_0 + \delta_1 =$ </span> 
-							<span class="fragment"> $ \frac{1}{2} +   \frac{1}{4} $ </span> <span class="fragment"> $ = \definecolor{tau}{RGB}{66,175,250} \color{tau} \frac{3}{4}$</span>
-						</p>
-					</section>
-					-->
+					<p><span class="fragment"> $ \delta_r = \sum_s p(r,s) \; / \; \Gamma (r,s)$ </span> 
+						<span class="fragment"> $, \ \  \Gamma (r,s) = \sum_i  \Gamma_i $ </span>
+					</p>
+					<p class="fragment"> $ \Gamma(0) = 1^2 + 1^2 = 2 \rightarrow \delta (0) = 1 \; / \; \Gamma(0) = \frac{1}{2} $ </p>
+					<p class="fragment"> $ \Gamma(1) = 2^2 = 4 \rightarrow \delta (1) = 1 \; / \; \Gamma(1) = \frac{1}{4} $ </p> 
+					<p class="fragment"> $ \definecolor{white}{RGB}{255,255,255} \color{tau} T \color{white} = \delta (0) + \delta (1) =  \color{tau} \frac{3}{4} $ </p> 
+				-->
+					<p class="fragment"> $ \Gamma (r,s) = \sum_i \color{tau} \sigma_i^{\rho}$ </p> 
+					<p class="fragment"> Probabilidad $\color{tau} p(r,s)$ </p> 
+					<p class="fragment"> Ejemplo:  $\color{tau}{T} = \delta_0 + \delta_1 = \frac{1}{1^2 + 1^2} + \frac{1}{2^2} = \color{tau}{3\ / \ 4}$ </p> 
 
-					<section>
-						<h3> Configuraciones <a> <em> (r, s) </em> </a> </h3>
-						<img src="img/fractura/exn2/n2b.png" height="200px" class = "fragment"> </img>
-						<!--
-						<p><span class="fragment"> $ \delta_r = \sum_s p(r,s) \; / \; \Gamma (r,s)$ </span> 
-							<span class="fragment"> $, \ \  \Gamma (r,s) = \sum_i  \Gamma_i $ </span>
-						</p>
-						<p class="fragment"> $ \Gamma(0) = 1^2 + 1^2 = 2 \rightarrow \delta (0) = 1 \; / \; \Gamma(0) = \frac{1}{2} $ </p>
-						<p class="fragment"> $ \Gamma(1) = 2^2 = 4 \rightarrow \delta (1) = 1 \; / \; \Gamma(1) = \frac{1}{4} $ </p> 
-						<p class="fragment"> $ \definecolor{white}{RGB}{255,255,255} \color{tau} T \color{white} = \delta (0) + \delta (1) =  \color{tau} \frac{3}{4} $ </p> 
-					-->
-						<p class="fragment"> $ \Gamma (r,s) = \sum_i \color{tau} \sigma_i^{\rho}$ </p> 
-						<p class="fragment"> Probabilidad $\color{tau} p(r,s)$ </p> 
-						<p class="fragment"> Ejemplo:  $\color{tau}{T} = \delta_0 + \delta_1 = \frac{1}{1^2 + 1^2} + \frac{1}{2^2} = \color{tau}{3\ / \ 4}$ </p> 
+					</p>
 
-						</p>
-
-					</section>
-
-				</section>  
+				</section>
 
 				<section>
 
@@ -432,25 +413,45 @@
 
 				<section> 	
 
-					<section >
-						<h2> El Modelo Minimalista (MM) </h2>
-						<img src="img/minim.png" height="350px"> </img>
+					<section>
+						<h2> El <a>Modelo Minimalista</a> (MM) </h2>
+						<img src="img/minim2.png" height="350px"> </img>
 					</section>
 
-					<section >
-						<h4> Motivación </h4>
+					<section>
+						<h3> Motivación </h3>
 						<p class="fragment"> Diseño de un automata celular sencillo que modele los tiempos de recurrencia de los <a>grandes terremotos en fallas</a></p> 
 					</section>
-					<section >
-						<h4> Autómatas celulares </h4>
+					<section>
+						<h3> Autómatas <a>Celulares</a> </h3>
+						<img src="img/randomlife.gif" height="300px" class="fragment"> </img>
 						<p class="fragment"> Elementos ("células", "celdas", etc.) en un <a>retículo discreto</a> </p> 
 						<p class="fragment"> Interacción entre elementos por <a>"vecindad"</a> </p> 
-						<p class="fragment"> <a>Reglas de transición<a/>: estado en $\ t \rightarrow \ $ estado en  $\ t + 1$  </p>
+						<p class="fragment"> Reglas de transición entre <a>tiempos discretos</a>: estado en $\ t \rightarrow \ $ estado en  $\ t + 1$  </p>
 					</section>
+					<section class="peque">
+						<h3> Reglas del <a>Modelo Minimalista</a> </h3>
+						<img src="img/minim2.png" height="350px" float="left" align="left" margin-right="40px"> </img>
+						<p class="fragment" align="left"> Conjunto <a>unidimensional</a> de celdas $c_i$, $\ i= 1,..,\color{tau} N$ </p>
+						<p class="fragment" align="left"> En cada $\ \Delta t = 1$ llega una partícula de carga a una celda al <a>azar</a>, quedando la celda <a>"ocupada"</a>. </p> 
+						<p class="fragment" align="left"> Celdas <a>no</a> pueden tener más de una partícula de carga. </p> 
+						<p class="fragment" align="left"> Si una partícula de carga llega a la <a>celda primera</a>, se produce una <a>relajación</a> de tamaño igual al número de celdas <a>contiguas ocupadas</a></p>
+					</section>
+
+					<section class="peque">
+						<h3> Correspondencias <a>Modelo Minimalista</a> y <a> Fallas sismogénicas </a> </h3>
+						<img src="img/minim2.png" height="350px" float="left" align="left" margin-right="40px"> </img>
+						<p class="fragment" align="left"> Conjunto <a>unidimensional</a> de celdas $c_i$, $\ i= 1,..,\color{tau} N$ </p>
+						<p class="fragment" align="left"> En cada $\ \Delta t = 1$ llega una partícula de carga a una celda al <a>azar</a>, quedando la celda <a>"ocupada"</a>. </p> 
+						<p class="fragment" align="left"> Celdas <a>no</a> pueden tener más de una partícula de carga. </p> 
+						<p class="fragment" align="left"> Si una partícula de carga llega a la <a>celda primera</a>, se produce una <a>relajación</a> de tamaño igual al número de celdas <a>contiguas ocupadas</a></p>
+					</section>
+
+
 
 				    <!-- MM AUTOMATA CELULAR ******************************************************* -->			
 					<section >
-						<h2 class="title4"> MM: Autómata Celular </h2>
+						<h2 class="title4"> MM: Autómata <a>Celular</a> </h2>
 						<div id="buttons">
 							<button onclick="fu_timer(1000)">Start time</button>
 							<button onclick="clearInterval(intv);">Stop time</button>
@@ -468,7 +469,7 @@
 					</section>
 
 					<!-- MINIMALIST OCCUPATION --> 
-					<section >
+					<section>
 						<h2 class="title4"> Ocupación </h2>
 						<div id="buttons">
 							<button onclick="fu_timer(1000)">Start time</button>
@@ -533,12 +534,12 @@
 				<section>  <!-- MM y algebra ******************************************************* -->
 
 					<section> 
-						<h2> MM: Soluciones Algebráicas </h2>
+						<h2> <a>MM</a>: Soluciones <a>Algebráicas</a> </h2>
 					</section>
 
 					<section data-background="#234254">
-						<h3>Configuraciones, Cadenas de Markov </h3>
-						<img src="img/minim-conf4.png" width="400px" height="150px"> </img>
+						<h3>Configuraciones, <a> Cadenas de Markov  </a></h3>
+						<!--<img src="img/minim-conf4b.png" width="400px" height="150px"> </img>
 						<h4>Matriz de Transición, $ N = 4 $</h4>
 						<div style="font-size: 70%;">
 						\[ M =  \begin{pmatrix}
@@ -551,11 +552,13 @@
 						1/4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2/4 &amp; 1/4 \\
 						1/4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 3/4 
 						\end{pmatrix} \]
-						</div>
+						</div>-->
+						<img src="img/markov.png" width="600px"> </img>
 					</section>
 
 					<section>
-						<h4>Probabilidad de retorno del terremoto característico </h4>
+						<h4>Probabilidad de retorno del <a>terremoto característico</a> </h4>
+						<!--
 						<div> 
 						<img src="img/pn20-black.png" style="float:left;margin:0px 15px 15px 0px;height:200px;"> </img>
 						$$ P(n) = \frac{n-1}{2^n} , \    N = 2 $$
@@ -564,6 +567,8 @@
 
 						$$ P(n) = \left( \frac{1}{4} \right)^n  \left[ - \frac{13}{16} + \frac{7 n}{4} - \frac{n^2}{2} + \frac{n^3}{32}  + 3^n \left[ -\frac{3}{16} + \frac{7 n}{324}  + \frac{n^2}{108}  + \frac{n^3}{2599} \right] \right] , \     N = 4 $$
 						</div>
+						-->
+						<img src="img/eq-pn.png" width="950px"> </img>
 					</section>
 
 				</section> <!-- FIN MM ALGEBRA --> 
@@ -643,7 +648,7 @@
 					<section>
 						<h4> Modelos de fractura de tipo  <a> haz de fibras </a> </h4>
 						<ol class="conclusion">
-							<li class="fragment"> Estudiando los modelos de fractura dependiente del tiempo con transferencia de carga, diseñamos un metodo probabilístico de calculo más eficiente que el estándar existente. </li>
+							<li class="fragment"> Estudiando los modelos de fractura dependiente del tiempo con transferencia de carga, diseñamos un metodo probabilístico de cálculo más eficiente que el estándar existente. </li>
 							<li class="fragment"> <a> El nuevo metodo emplea conceptos afines a la desintegración  radiactiva de los núcleos atómicos. </a> </li>
 							<li class="fragment"> Para describir el tiempo de vida de sistemas jerárquicos con muchos niveles usamos un método recursivo.   </li>
 							<li class="fragment">  <a>Utilizando diagramas primarios y efectivos conseguimos establecer cotas mínimas al tiempo de colapso para tamaños infinitos, siendo este mayor que cero, lo que demuestra la existencia de un punto crítico Tc > 0 .</a> </li>

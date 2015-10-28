@@ -14,7 +14,10 @@
    id="svg4087"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="fiber.svg">
+   sodipodi:docname="fiber.svg"
+   inkscape:export-filename="/Users/tangiblex/tesis/pages/img/fractura/fiber.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -30,9 +33,9 @@
      showgrid="true"
      inkscape:window-width="1280"
      inkscape:window-height="752"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
+     inkscape:window-x="237"
+     inkscape:window-y="745"
+     inkscape:window-maximized="0"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
@@ -128,7 +131,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -150,8 +153,7 @@
      inkscape:label="fib1"
      id="layer7"
      inkscape:groupmode="layer"
-     transform="translate(-0.07883651,-231.69743)"
-     sodipodi:insensitive="true">
+     transform="translate(-0.07883651,-231.69743)">
     <rect
        y="-392.3125"
        x="80"

@@ -212,3 +212,8 @@ p.peque  {
 	text-align: left;
 }
 
+section.peque p  {
+	font-size: 27px;
+	padding: 0px 100px;
+}
+
