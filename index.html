@@ -101,8 +101,6 @@
 					</section>
 				</section>
 
-				<!-- MINIMALIST SIZES --> 
-
 				<section> <!--  BETHE -->
 					<section>
 						<h2> Modelo de <a> agregación </a> de <a> pares </a> de partículas  </h2>
@@ -116,7 +114,7 @@
 						<h2> <a> Motivación </a> </h2>
 						<p> La percolación <a>clásica</a> </p> 
 						<p class="fragment"> Modelos probabilísticos con transiciones de fase <a>geométricas</a> (exponentes críticos) </p>
-						<small class="fragment"> Marco <a>conceptual unificado</a> $ \definecolor{tau}{RGB}{66,175,250} \rightarrow$ diseminación de infecciones, <a>dinámica de las regiones solares</a>, fractura en medios heterogéneos, <a>estructura galactica</a>, redes (internet), etc. </small>
+						<small class="fragment"> Marco <a>conceptual unificado</a> $ \definecolor{tau}{RGB}{66,175,250} \rightarrow$ diseminación de infecciones, <a>dinámica de las regiones activas solares</a>, fractura en medios heterogéneos, <a>estructura galáctica</a>, redes (internet), etc. </small>
 						<p class="fragment"> La percolación <a>de dímeros</a>? </p> 
 						<p class="fragment"> Misma clase de <a> universalidad</a>? </p> 
 					</section>
@@ -128,7 +126,7 @@
 					<section>
 						<img src="img/lattice/lattice.png" width="800px"> </img>
 					</section>
-					<section>
+					<!--<section>
 						<img src="img/lattice/lattice-1.png" width="800px"> </img>
 					</section>
 					<section>
@@ -137,27 +135,29 @@
 					<section>
 						<img src="img/lattice/lattice-3.png" width="800px"> </img>
 					</section>
+				-->
 					<section>
 						<img src="img/lattice/lattice-5.png" width="800px"> </img>
 					</section>
+					<!--
 					<section>
 						<img src="img/lattice/lattice-5b.png" width="800px"> </img>
 					</section>
+				-->
 					<section>
 						<img src="img/lattice/lattice-6.png" width="800px"> </img>
 					</section>
 				</section>  
-
+				<!--
 				<section>
 						<h4> Resultados modelo en <a> una dimensión </a> </h4>
-						<!---<small class="fragment"> Tamaño Medio: $\ \ \color{tau} T(l) \propto e^{0.366\ l} $ </small></br> -->
 						<small class="fragment"> Probabilidad de Tamaño Finito: $\ \color{tau} S = 1 $ </small></br>
 						<small class="fragment"> Probabilidad tamaño $s$ : $\ \color{tau} lim_{s \rightarrow \infty} n_s(l) = 0 $</small></br>
 						<h4 class="fragment"> Resultados modelo en <a> 2 dimensiones </a> </h4>
 						<small class="fragment">  $ l \leq 3 \rightarrow $ solo <a>tamaños finitos </a> </small></br>
 						<small class="fragment">  $ l \geq 4 \rightarrow $ aparecen tamaños <a>infinitos</a> </small></br>
 				</section>
-
+			-->
 				<section> <!--  L = 2   --> 
 					<section>
 						<img src="img/lattice/lattice-l2-empty.png" width="800px"> </img>
@@ -263,13 +263,13 @@
 						<h3>  Modelos de <a> transferencia de carga Jerárquica en el tiempo</a> </h3>
 						<p class="fragment"> La transferencia de <a>carga</a> se da entre "áreas" iguales</p>
 						<p class="fragment"> Simulando la <a>redistribución elástica </a> de esfuerzo adyacente a una ruptura </p>
-						<p class="fragment"> Conveniente para simular fracturas en medios heterogéneos (fallas, etc.) </p>
+						<p class="fragment"> Usados para simular fracturas en medios heterogéneos (fallas, etc.) </p>
 					</section>
 
 
 					<section> 
-						<h3>  Es el tiempo de colapso de un sistema infinito de TCJ, <a> T = 0 </a> ? </h3>
-						<img src="img/fractura/tabla-hls-2.png" height="300px" class = "fragment"> </img>
+						<h3>  ¿Es el tiempo de colapso de un sistema infinito de TCJ, <a> T = 0 </a> ? </h3>
+						<img src="img/fractura/tabla-hls-a.png" height="300px" class = "fragment"> </img>
 					</section> 
 
 					<!-- <section>
@@ -352,24 +352,17 @@
 					</section>
 				</section>   
 
+				<!---
 				<section>
-					<h3> Configuraciones <a> <em> (r, s) </em> </a> </h3>
+					<h3> Configuraciones <a> <em> (r) </em> </a> </h3>
 					<img src="img/fractura/exn2/n2b.png" height="200px" class = "fragment"> </img>
-					<!--
-					<p><span class="fragment"> $ \delta_r = \sum_s p(r,s) \; / \; \Gamma (r,s)$ </span> 
-						<span class="fragment"> $, \ \  \Gamma (r,s) = \sum_i  \Gamma_i $ </span>
-					</p>
-					<p class="fragment"> $ \Gamma(0) = 1^2 + 1^2 = 2 \rightarrow \delta (0) = 1 \; / \; \Gamma(0) = \frac{1}{2} $ </p>
-					<p class="fragment"> $ \Gamma(1) = 2^2 = 4 \rightarrow \delta (1) = 1 \; / \; \Gamma(1) = \frac{1}{4} $ </p> 
-					<p class="fragment"> $ \definecolor{white}{RGB}{255,255,255} \color{tau} T \color{white} = \delta (0) + \delta (1) =  \color{tau} \frac{3}{4} $ </p> 
-				-->
-					<p class="fragment"> $ \Gamma (r,s) = \sum_i \color{tau} \sigma_i^{\rho}$ </p> 
-					<p class="fragment"> Probabilidad $\color{tau} p(r,s)$ </p> 
+					<p class="fragment"> $ \Gamma (r) = \sum_i \ \color{tau} \sigma_i^{\rho}$ </p> 
 					<p class="fragment"> Ejemplo:  $\color{tau}{T} = \delta_0 + \delta_1 = \frac{1}{1^2 + 1^2} + \frac{1}{2^2} = \color{tau}{3\ / \ 4}$ </p> 
 
 					</p>
 
 				</section>
+			-->
 
 				<section>
 
@@ -378,7 +371,11 @@
 					</section> 
 					<section>
 						<img src="img/fractura/n8.png" height="300px"> </img>
-						<p> Configuraciones <em> <a> (r,s) </a>  </em> y configuraciones <a> efectivas </a> </p>  						
+						<p> Configuraciones <em> <a> (r,s) </a>  </em> y configuraciones <a> réplica </a> </p> 
+						<p class="fragment"> $ \Gamma (r,s) = \sum_i \color{tau} \sigma_i^{\rho}$ </p> 
+						<p class="fragment"> Probabilidad $\color{tau} p(r,s)$ </p> 
+						<p class="fragment"> $\Gamma(r) = \color{tau}  \sum_s p(r,s) * \Gamma(r,s)$ </p> 
+						<p class="fragment">  $\color{tau}{T} = \sum_r \delta_r $</p>					
 					</section> 
 					<section>
 						<img src="img/fractura/n8b.png" height="300px"> </img>
@@ -403,8 +400,8 @@
 						<img src="img/fractura/trans/fig-bounds.png" height="600px" class = "fragment"> </img>
 					</section>  
 					<section> 
-						<h3>  Es el tiempo de colapso de un sistema infinto de TCJ, <a> T = 0 </a> ? <span class="fragment"> <a> NO </a> <span> </h3>
-						<img src="img/fractura/tabla-hls-3.png" height="300px" class = "fragment"> </img>
+						<h3>  ¿Es el tiempo de colapso de un sistema infinito de TCJ, <a>T = 0</a>? <span class="fragment"> <a> NO </a> <span> </h3>
+						<img src="img/fractura/tabla-hls-b.png" height="300px" class = "fragment"> </img>
 						<p class="fragment">  $\color{tau} \ 0.325 \leq T_\infty \leq 0.339 $</p>
 
 					</section>  
@@ -420,7 +417,7 @@
 
 					<section>
 						<h3> Motivación </h3>
-						<p class="fragment"> Diseño de un automata celular sencillo que modele los tiempos de recurrencia de los <a>grandes terremotos en fallas</a></p> 
+						<p class="fragment"> Diseño de un autómata celular sencillo que modele los tiempos de recurrencia de los <a>grandes terremotos en fallas</a></p> 
 					</section>
 					<section>
 						<h3> Autómatas <a>Celulares</a> </h3>
@@ -439,30 +436,42 @@
 					</section>
 
 					<section class="peque">
-						<h3> Correspondencias <a>Modelo Minimalista</a> y <a> Fallas sismogénicas </a> </h3>
-						<img src="img/minim2.png" height="350px" float="left" align="left" margin-right="40px"> </img>
-						<p class="fragment" align="left"> Conjunto <a>unidimensional</a> de celdas $c_i$, $\ i= 1,..,\color{tau} N$ </p>
-						<p class="fragment" align="left"> En cada $\ \Delta t = 1$ llega una partícula de carga a una celda al <a>azar</a>, quedando la celda <a>"ocupada"</a>. </p> 
-						<p class="fragment" align="left"> Celdas <a>no</a> pueden tener más de una partícula de carga. </p> 
-						<p class="fragment" align="left"> Si una partícula de carga llega a la <a>celda primera</a>, se produce una <a>relajación</a> de tamaño igual al número de celdas <a>contiguas ocupadas</a></p>
+						<h4> Correspondencias <a>Modelo Minimalista</a> y <a> Fallas sismogénicas </a> </h4>
+						<img src="img/minim/falla0.png" height="650px"</img>
 					</section>
+					<!--
+					<section class="peque">
+						<h4> Correspondencias <a>Modelo Minimalista</a> y <a> Fallas sismogénicas </a> </h4>
+						<img src="img/minim/falla2.png" height="650px"</img>
+					</section>
+					<section class="peque">
+						<h4> Correspondencias <a>Modelo Minimalista</a> y <a> Fallas sismogénicas </a> </h4>
+						<img src="img/minim/falla3.png" height="650px"</img>
+					</section>
+					<section class="peque">
+						<h4> Correspondencias <a>Modelo Minimalista</a> y <a> Fallas sismogénicas </a> </h4>
+						<img src="img/minim/falla4.png" height="650px"</img>
+					</section>
+					<section class="peque">
+						<h4> Correspondencias <a>Modelo Minimalista</a> y <a> Fallas sismogénicas </a> </h4>
+						<img src="img/minim/falla5.png" height="650px"</img>
+					</section>
+					-->
 
 
 
 				    <!-- MM AUTOMATA CELULAR ******************************************************* -->			
 					<section >
 						<h2 class="title4"> MM: Autómata <a>Celular</a> </h2>
-						<div id="buttons">
-							<button onclick="fu_timer(1000)">Start time</button>
-							<button onclick="clearInterval(intv);">Stop time</button>
-							<button onclick="fu_timer(500)"> Fast </button>
-							<button onclick="fu_timer(100);"> Faster </button>
-							<button onclick="fu_timer(20);"> Insane </button>
-							<button onclick="fu_timer_full_speed();"> !!!! </button>
-							<button onclick="reset_data();"> Reset </button>
-							<button onclick="toggleSounds();"> Sounds </button>
-							<button onclick="eff_time();"> Eff-Time </button>
-							<button onclick="draw_anim();"> Draw Animation </button>
+							<div id="buttons">
+							<button onclick="fu_timer(1000)">Inicio </button>
+							<button onclick="clearInterval(intv);">Parar</button>
+							<button onclick="fu_timer(500)"> ++ </button>
+							<button onclick="fu_timer(100);"> +++ </button>
+							<button onclick="fu_timer(20);"> ++++ </button>
+							<button onclick="fu_timer_full_speed();"> !!! </button>
+							<button onclick="reset_data();"> Empezar </button>
+							<button onclick="draw_anim();"> Animación </button>
 						</div>
 						<div id="minim"></div> 
 						<script src="js/minim-1.js"> </script>
@@ -472,16 +481,14 @@
 					<section>
 						<h2 class="title4"> Ocupación </h2>
 						<div id="buttons">
-							<button onclick="fu_timer(1000)">Start time</button>
-							<button onclick="clearInterval(intv);">Stop time</button>
-							<button onclick="fu_timer(500)"> Fast </button>
-							<button onclick="fu_timer(100);"> Faster </button>
-							<button onclick="fu_timer(20);"> Insane </button>
-							<button onclick="fu_timer_full_speed();"> !!!! </button>
-							<button onclick="reset_data();"> Reset </button>
-							<button onclick="toggleSounds();"> Sounds </button>
-							<button onclick="eff_time();"> Eff-Time </button>
-							<button onclick="draw_anim();"> Draw Animation </button>
+							<button onclick="fu_timer(1000)">Inicio </button>
+							<button onclick="clearInterval(intv);">Parar</button>
+							<button onclick="fu_timer(500)"> ++ </button>
+							<button onclick="fu_timer(100);"> +++ </button>
+							<button onclick="fu_timer(20);"> ++++ </button>
+							<button onclick="fu_timer_full_speed();"> !!! </button>
+							<button onclick="reset_data();"> Empezar </button>
+							<button onclick="draw_anim();"> Animación </button>
 						</div>
 						<div id="minim-occupation"></div> 
 						<script src="js/minim-occupation.js"> </script>
@@ -492,16 +499,14 @@
 					<section >
 						<h2 class="title4"> Periodo De Retorno  </h2>
 						<div id="buttons">
-							<button onclick="fu_timer(1000)">Start time</button>
-							<button onclick="clearInterval(intv);">Stop time</button>
-							<button onclick="fu_timer(500)"> Fast </button>
-							<button onclick="fu_timer(100);"> Faster </button>
-							<button onclick="fu_timer(20);"> Insane </button>
-							<button onclick="fu_timer_full_speed();"> !!!! </button>
-							<button onclick="reset_data();"> Reset </button>
-							<button onclick="toggleSounds();"> Sounds </button>
-							<button onclick="eff_time();"> Eff-Time </button>
-							<button onclick="draw_anim();"> Draw Animation </button>
+							<button onclick="fu_timer(1000)">Inicio </button>
+							<button onclick="clearInterval(intv);">Parar</button>
+							<button onclick="fu_timer(500)"> ++ </button>
+							<button onclick="fu_timer(100);"> +++ </button>
+							<button onclick="fu_timer(20);"> ++++ </button>
+							<button onclick="fu_timer_full_speed();"> !!! </button>
+							<button onclick="reset_data();"> Empezar </button>
+							<button onclick="draw_anim();"> Animación </button>
 						</div>
 
 						<div id="minim-time"></div> 
@@ -510,16 +515,14 @@
 					<section>
 						<h2 class="title4"> Periodo de Retorno (II) </h2>
 						<div id="buttons">
-							<button onclick="fu_timer(1000)">Start time</button>
-							<button onclick="clearInterval(intv);">Stop time</button>
-							<button onclick="fu_timer(500)"> Fast </button>
-							<button onclick="fu_timer(100);"> Faster </button>
-							<button onclick="fu_timer(20);"> Insane </button>
-							<button onclick="fu_timer_full_speed();"> !!!! </button>
-							<button onclick="reset_data();"> Reset </button>
-							<button onclick="toggleSounds();"> Sounds </button>
-							<button onclick="eff_time();"> Eff-Time </button>
-							<button onclick="draw_anim();"> Draw Animation </button>
+							<button onclick="fu_timer(1000)">Inicio </button>
+							<button onclick="clearInterval(intv);">Parar</button>
+							<button onclick="fu_timer(500)"> ++ </button>
+							<button onclick="fu_timer(100);"> +++ </button>
+							<button onclick="fu_timer(20);"> ++++ </button>
+							<button onclick="fu_timer_full_speed();"> !!! </button>
+							<button onclick="reset_data();"> Empezar </button>
+							<button onclick="draw_anim();"> Animación </button>
 						</div>
 						<div id="minim-time-cumul"></div> 
 						<script src="js/minim-time.js"> </script>
@@ -560,7 +563,7 @@
 						<h4>Probabilidad de retorno del <a>terremoto característico</a> </h4>
 						<!--
 						<div> 
-						<img src="img/pn20-black.png" style="float:left;margin:0px 15px 15px 0px;height:200px;"> </img>
+						<img src="img/pn10-black.png" style="float:left;margin:0px 15px 15px 0px;height:200px;"> </img>
 						$$ P(n) = \frac{n-1}{2^n} , \    N = 2 $$
 					
 						$$ P(n) = \left( \frac{2}{3} \right)^n  \frac{ ( n - 2 ) ( n + 5 )}{32}  , \     N = 3 $$
@@ -568,7 +571,7 @@
 						$$ P(n) = \left( \frac{1}{4} \right)^n  \left[ - \frac{13}{16} + \frac{7 n}{4} - \frac{n^2}{2} + \frac{n^3}{32}  + 3^n \left[ -\frac{3}{16} + \frac{7 n}{324}  + \frac{n^2}{108}  + \frac{n^3}{2599} \right] \right] , \     N = 4 $$
 						</div>
 						-->
-						<img src="img/eq-pn.png" width="950px"> </img>
+						<img src="img/eq-pn2.png" width="950px"> </img>
 					</section>
 
 				</section> <!-- FIN MM ALGEBRA --> 
@@ -579,25 +582,42 @@
 						<h2> MM y las Fallas Reales</h2>
 						<img src="img/los-angeles.jpg" width="600px"> </img>
 				</section>
-
-				<section>
+				<!--
+				<section class="peque">
 						<h3> <a> Ajuste </a>  de MM a una falla</h3>
-						<ol>
-							<li class="fragment"> $ \alpha \ (MM) \ \approx \alpha \ (falla)  \implies \;$ <em> <a> N </a> </em>   </li>
-							<li class="fragment"> $ \definecolor{tau}{RGB}{66,175,250} \mu  \ (falla) \dashrightarrow \mu  \ (MM) \implies \color{tau} \tau \ (MM)  $  </li>
-						</ol>
+						<p class="fragment"> Correspondencia <a>MM</a> y <a>Falla: </a> </p> 
+						<p class="fragment"> Cuanto es $\ \Delta t = 1 $ en tiempos reales (<a>años</a>)? </p> 
+						<p class="fragment"> Cuanto es $\color{tau}\ N$ ?  </a> </p>
+						<img src="img/minim/p20-falla.png" width="400px" class="fragment" align="left" float="left"> </img>
+						<p class="fragment"> $\color{tau} N$ determina la distribución de tiempos de retorno </p> 
+						<p class="fragment"> Distribución tiempos de retorno de la <a>falla</a> $\ \color{tau} \rightarrow$ $\ N$   </p> 
+						<p class="fragment"> <a>Tiempo medio de recurrencia</a> de la falla: $\ \color{tau} \rightarrow$ $\ \Delta t$ </p> 
+
 				</section>
+			-->
+
+				<section class="peque">
+						<h3> <a> "Ajuste" </a>  de MM a una falla </h3>
+						<h4 class="fragment"> Ajuste por el método de los<a> Momentos </a> </h4> 
+						<img src="img/minim/alpha.png" width="400px" class="fragment" float="left" align="left"> </img>
+						<p class="fragment"> Falla tiene una serie temporal de terremotos, con </br> $\ \mu_{falla}$ y $\ \sigma_{falla} \ \rightarrow \color{tau} \alpha_{falla} = \frac{\sigma}{\mu}\ $  (aperiodicidad) </p> 
+						<p class="fragment"> $\color{tau} N$ determina la aperiodicidad </p> 
+						<p class="fragment"> $\ \alpha_{MM} = \alpha_{falla} \rightarrow \ N_{MM}$ </p> 
+						<p class="fragment"> $\ \mu_{MM} = \mu_{falla} \rightarrow \ \Delta t_{MM}$ </p> 
+				</section>
+
 
 				<section>
 						<h3> <a>Área </a> de Tokio </h3>
 						<img src="img/tokio-black.png" width="800px" height="600px"> </img>
 				</section>
 
+				<!--
 				<section>
 					<h3> <a> Predicción </a> de terremotos con MM </h3>
 					<img src="img/parkfield-black.png" width="700px" class="fragment"> </img>
-
 				</section>
+				-->
 				
 				<section>
 					<h3> Estrategia de <a> optimización  </a> de la predicción </h3>
@@ -611,21 +631,18 @@
 				</section>
 
 
-				<section>
-					<h3> Ejemplo <a> N = 20  </a> </h3>
-					$ f_e $ = fracción de errores </br> 
-					$ f_a $ = fracción de tiempo de alarma  </br> 
-					$ L (n) \ = \ f_e + f_a $ 
+				<section class="peque">
+					<h4> Ejemplo <a> N = 20  </a> </h4>
+					<p> $ f_e $ = fracción de errores, $ \ f_a $ = fracción de tiempo de alarma  </p> 
+				    <p> Toma de Decisiones: <a> Función de pérdidas</a> : $\ L (n) \ = \ f_e + f_a $  </p>
+				    <img src="img/fefa-black.png" width="700px" height="500px"> </img>
  				</section>
-
-				<section>
-						<h3> $f_e (n) , \; f_a (n),\; L(n) \ \ \ (N = 20) $</h3>
-						<img src="img/fefa-black.png" width="700px" height="500px"> </img>
-				</section>
+				<!--
 				<section>
 						<h3> $f_a \; vs \; f_e $ </h3>
 						<img src="img/favsfe-black.png" width="700px" height="500px"> </img>
-					</section>
+				</section>
+				-->
 
 				</section> <!-- FIN MM y las fallas --> 
 
@@ -649,7 +666,7 @@
 						<h4> Modelos de fractura de tipo  <a> haz de fibras </a> </h4>
 						<ol class="conclusion">
 							<li class="fragment"> Estudiando los modelos de fractura dependiente del tiempo con transferencia de carga, diseñamos un metodo probabilístico de cálculo más eficiente que el estándar existente. </li>
-							<li class="fragment"> <a> El nuevo metodo emplea conceptos afines a la desintegración  radiactiva de los núcleos atómicos. </a> </li>
+							<li class="fragment"> <a> El nuevo método emplea conceptos afines a la desintegración  radiactiva de los núcleos atómicos. </a> </li>
 							<li class="fragment"> Para describir el tiempo de vida de sistemas jerárquicos con muchos niveles usamos un método recursivo.   </li>
 							<li class="fragment">  <a>Utilizando diagramas primarios y efectivos conseguimos establecer cotas mínimas al tiempo de colapso para tamaños infinitos, siendo este mayor que cero, lo que demuestra la existencia de un punto crítico Tc > 0 .</a> </li>
 						<ol class="conclusion">
@@ -657,12 +674,12 @@
 					<section>
 						<h4> Modelos de sismicidad de tipo  <a> autómata celular  </a> </h4>
 						<ol class="conclusion">
-							<li class="fragment"> Diseñamos un autómata celular sencillo, el Modelo Minimalista (MM), con la intención que su comportamiento imitara la teoría del Rebote Elástico, o Ciclo Sísmico, de Reid, para los grandes terremotos. </li>
+							<li class="fragment"> Diseñamos un autómata celular sencillo, el Modelo Minimalista (MM), con la intención que su comportamiento imitara la teoría del Rebote Elástico, o Ciclo Sísmico, para los grandes terremotos. </li>
 							<li class="fragment"> <a> Nuestro modelo puede abordarse mediante Cadenas de Markov y con simulaciones numéricas.</a> </li>
 							<li class="fragment"> La relación tamaño-frecuencia de las relajaciones es del tipo terremoto característico. </li>
 							<li class="fragment"> <a> Los parámetros del MM pueden ajustarse a fallas reales, estableciendo una correspondencia entre el MM y la falla. </a> </li>
 							<li class="fragment"> La estadística del tiempo de retorno de la máxima relajación es competitiva frente a otras distribuciones de probabilidad existentes en la literatura. </li>
-							<li class="fragment"> <a>También hemos estudiado las posibilidades predictivas del MM mediante diagramas de error usando exploraciones mono y bi-paramétricas. </a></li>
+							<li class="fragment"> <a>También hemos estudiado las posibilidades predictivas del MM mediante la función de pérdida y diagramas de error usando exploraciones mono y bi-paramétricas. </a></li>
 						<ol class="conclusion">
 					</section>
 
